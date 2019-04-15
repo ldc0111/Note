@@ -173,7 +173,7 @@ IANA(因特网已分配数值权威机构)维护着一个端口号分配状况�
 * **已登记的端口(1024\~49151)**：这些端口不受IANA控制，不过由IANA登记并提供它们的使用情况清单，以方便整个群体。可能的话，相同端口号也分配给TCP和UDP的同一给定服务。49151这个上限的引入是为了给临时端口留出范围
 * **动态、私用的端口(49152\~65535)**：IANA不管这些端口。就是我们所称的临时端口
 
-<div align="center"> <img src="../pic/unp-2-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-1.png"/> </div>
 
 ### 1.2 套接字
 
@@ -191,7 +191,7 @@ IANA(因特网已分配数值权威机构)维护着一个端口号分配状况�
 
 1. **服务器端在21号端口监听，等待来自客户端的连接**
 
-<div align="center"> <img src="../pic/unp-2-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-2.png"/> </div>
 
 使用记号{\*:21,\*:\*}指出服务器的套接字对
 
@@ -200,15 +200,15 @@ IANA(因特网已分配数值权威机构)维护着一个端口号分配状况�
 
 2. **主机206.168.112.219上的第一个客户发起一个连接，临时端口1500**：
 
-<div align="center"> <img src="../pic/unp-2-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-3.png"/> </div>
 
 3. **连接建立后，服务器fork一个子进程处理该客户的请求**：
 
-<div align="center"> <img src="../pic/unp-2-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-4.png"/> </div>
 
 4. **主机206.168.112.219上一个新的客户发起一个连接，服务器fork另一个子进程处理新客户的请求（由于临时端口不同，所有和前一个连接不是相同的连接）**：
 
-<div align="center"> <img src="../pic/unp-2-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-5.png"/> </div>
 
 ## 2.套接字地址结构
 
@@ -216,7 +216,7 @@ IANA(因特网已分配数值权威机构)维护着一个端口号分配状况�
 
 **套接字地址结构仅在给定主机上使用：虽然结构中的某些字段用在不同主机之间的通信中，但是结构本身并不在主机之间传递**
 
-<div align="center"> <img src="../pic/unp-3-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-1-1.png"/> </div>
 
 * **sockaddr_in**
     * IPv4地址和TCP或UDP端口号在套接字地址结构中总是以**网络字节序**来存储
@@ -240,13 +240,13 @@ IANA(因特网已分配数值权威机构)维护着一个端口号分配状况�
 
 **1）从进程到内核传递套接字地址结构**：bind、connect、sendto
 
-<div align="center"> <img src="../pic/unp-3-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-3-2.png"/> </div>
 
 **2）从内核到进程传递套接字地址结构**：accept、recvfrom、getsockname、getpeername
 * **值**：告诉内核该结构的大小，内核在写结构时不至于越界
 * **结果**：告诉进程内核在该结构中实际存储了多少信息（如果套接字地址结构是**固定长度**的，那么从内核返回的值总是那个固定长度，如IPv4的sockaddr_in长度是16，IPv6的sockaddr_in6长度是28；对于**可变长度**的套接字地址结构，返回值可能小于结构的最大长度）
 
-<div align="center"> <img src="../pic/unp-3-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-3-3.png"/> </div>
 
 > 这里只是使用“套接字地址结构的长度”作为例子，来解释“值-结果”参数，还有其它的”值-结果“参数
 
@@ -282,7 +282,7 @@ int memcmp(const void *ptr1,const void *ptr2,size_t nbytes);
 * **小端字节序**：高序字节存储在高地址，低序字节存储在低地址
 * **大端字节序**：高序字节存储在低地址，低序字节存储在高地址
 
-<div align="center"> <img src="../pic/unp-3-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-3-4.png"/> </div>
 
 * **主机字节序**：某个给定系统所用的字节序
 * **网络字节序**：网络协议必须指定一个网络字节序。举例来说，在每个TCP分节中都有16位的端口号和32位的IPv4地址。发送协议栈和接收协议栈必须就这些多字节字段各个字节的传送顺序达成一致（**网际协议使用大端字节序**传送这些多字节整数）
@@ -346,7 +346,7 @@ const char* inet_ntop(int family,const void *addrptr,char *strptr,size_t len);
 
 # 二.基本TCP套接字编程
 
-<div align="center"> <img src="../pic/unp-tcp-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-1.png"/> </div>
 
 TCP提供了可靠传输，当TCP向另一端发送数据时，要求对端返回一个确认。如果没有收到确认，TCP就重传数据并等待更长时间。在数次重传失败后，TCP才放弃，如此在尝试发送数据上所花的总时间一般为4~10分钟（依赖于具体实现）
 
@@ -365,7 +365,7 @@ TCP提供了可靠传输，当TCP向另一端发送数据时，要求对端返�
 
 每一个TCP套接字有一个发送缓冲区，可以使用SO_SNDBUF套接字选项更改该缓冲区的大小。当某个进程调用write时，内核从该应用进程的缓冲区中复制所有数据到所写套接字的发送缓冲区
 
-<div align="center"> <img src="../pic/unp-tcp-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-2.png"/> </div>
 
 如果该套接字的发送缓冲区容不下该应用进程的所有数据（或是应用进程的缓冲区大于套接字的发送缓冲区，或者套接字的发送缓冲区中已有其他数据），该应用进程将被投入睡眠（这里假设是默认情况下，默认情况下套接字是阻塞的）。内核将不从write系统调用返回，直到应用进程缓冲区中的所有数据都复制到套接字发送缓冲区。因此，**从写一个TCP套接字的write调用成功返回仅仅表示我们可以重新使用原来的应用进程缓冲区，并不表明对端的TCP或应用进程已接收到数据**
 
@@ -387,11 +387,11 @@ MSS的目的之一就是试图避免分片，较新的实现还使用了路径MT
 
 ### 1）socket函数
 
-<div align="center"> <img src="../pic/unp-tcp-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-3.png"/> </div>
 
 * **family**：指定协议族，也往往被称为协议域
 
-<div align="center"> <img src="../pic/unp-tcp-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-4.png"/> </div>
 
 * **type**：指明套接字的类型
 
@@ -399,15 +399,15 @@ MSS的目的之一就是试图避免分片，较新的实现还使用了路径MT
 
 * **protocol**：协议类型常值。设为0的话表示选择所给定family和type组合的系统默认值
 
-<div align="center"> <img src="../pic/unp-tcp-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-5.png"/> </div>
 
 family和type的有效组合如下：
 
-<div align="center"> <img src="../pic/unp-tcp-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-7.png"/> </div>
 
 ### 2）connect函数
 
-<div align="center"> <img src="../pic/unp-tcp-8.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-8.png"/> </div>
 
 * **sockfd**：客户端套接字描述符
 * **servaddr**：包含服务器IP地址和端口号的套接字地址结构
@@ -428,11 +428,11 @@ family和type的有效组合如下：
 
 bind把一个本地协议地址赋予一个套接字
 
-<div align="center"> <img src="../pic/unp-tcp-9.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-9.png"/> </div>
 
 调用bind可以指定IP地址或端口，可以两者都指定，也可以都不指定：
 
-<div align="center"> <img src="../pic/unp-tcp-10.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-10.png"/> </div>
 
 * 如果指定端口号为0，内核在bind被调用时选择一个临时端口
 * 如果指定IP地址为通配地址（对IPv4来说，通配地址由常值INADDR_ANY来指定，值一般为0），内核将等到套接字已连接(TCP)或已在套接字上发出数据报(UDP)时才选择一个本地IP地址
@@ -448,14 +448,14 @@ listen做2件事：
 * 当socket创建一个套接字时，套接字被假设为一个主动套接字，listen将其转成一个被动套接字，指示内核应接受指向该套接字的连接请求
 * **第二个参数规定了内核应为相应套接字排队的最大连接个数**
 
-<div align="center"> <img src="../pic/unp-tcp-11.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-11.png"/> </div>
 
 内核为任一给定的监听套接字维护两个队列，两个队列之和不超过backlog：
 
 * **未完成连接队列**
 * **已完成连接队列**
 
-<div align="center"> <img src="../pic/unp-tcp-12.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-12.png"/> </div>
 
 当进程调用accept时，如果已连接队列不为空，那么队头项将返回给进程，否则进程将投入睡眠，直到TCP在该队列中放入一项才唤醒它
 
@@ -469,7 +469,7 @@ listen做2件事：
 
 accept用于从已完成连接队列队头返回下一个已完成连接，如果已完成连接队列为空，那么进程被投入睡眠
 
-<div align="center"> <img src="../pic/unp-tcp-13.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-13.png"/> </div>
 
 * **sockfd**：监听套接字描述符
 * **cliaddr**：已连接的对端客户的套接字地址结构
@@ -479,7 +479,7 @@ accept用于从已完成连接队列队头返回下一个已完成连接，如�
 
 ### 6）close函数
 
-<div align="center"> <img src="../pic/unp-tcp-14.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-14.png"/> </div>
 
 close一个TCP套接字的默认行为是把套接字标记为关闭，立即返回调用进程，然后TCP将尝试发送已排队等待发送到对端的任何数据，发送完毕后是正常的TCP连接终止序列
 
@@ -487,7 +487,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 ### 7）shutdown函数
 
-<div align="center"> <img src="../pic/unp-tcp-17.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-17.png"/> </div>
 
 * **howto**
     - `SHUT_RD`：**关闭连接的读这一半**，套接字接收缓冲区中的现有数据都被丢弃。进程不能再对这样的套接字调用任何读函数（对一个TCP套接字这样调用shutdown函数后，由该套接字接收的来自对端的任何数据都被确认，然后悄然丢弃）
@@ -507,7 +507,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 这两个函数与TCP连接建立过程中套接字地址结构的信息获取相关
 
-<div align="center"> <img src="../pic/unp-tcp-16.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-16.png"/> </div>
 
 * **getsockname用于返回与某个套接字关联的本地协议地址**：
     - 没调用bind的TCP客户上，connect返回后，获取由内核赋予该连接的本地IP地址和端口号
@@ -517,7 +517,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 * **getpeername用于返回与某个套接字关联的外地协议地址**：
     - 当一个服务器是由调用过accept的某个进程通过调用exec执行程序时，它能获取客户身份的唯一途径便是调用getpeername。例如inetd fork并exec某个TCP服务器程序：
 
-<div align="center"> <img src="../pic/unp-tcp-15.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-15.png"/> </div>
 
 <br>
 <br>
@@ -526,13 +526,13 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 典型的UDP客户/服务器程序的函数调用：
 
-<div align="center"> <img src="../pic/unp-8-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-8-1.png"/> </div>
 
 ## 1.缓冲区
 
 发送缓冲区用虚线表示，因为实际上并不存在。任何UDP套接字都有发送缓冲区大小（同样可以使用SO_SNDBUF套接字选项更改），不过**该缓冲区仅表示能写到该套接字的UDP数据报的大小上限**。如果应用进程写一个大于套接字发送缓冲区大小的数据报，内核将返回该进程一个EMSGSIZE错误。
 
-<div align="center"> <img src="../pic/unp-udp-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-udp-1.png"/> </div>
 
 因为UDP是不可靠的，不必保存应用进程数据的一个副本，所以不需一个真正的发送缓冲区。（应用进程的数据在沿协议栈向下传递时，通常被复制到某种格式的一个内核缓冲区中，然而当该数据被发送之后，这个副本就被数据链路层丢弃了）
 
@@ -554,7 +554,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 ### 1）recvfrom与sendto函数
 
-<div align="center"> <img src="../pic/unp-8-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-8-2.png"/> </div>
 
 * **recvfrom**：
     - **from**：指向一个将由该函数在返回时填写数据报发送者的协议地址的套接字地址结构
@@ -571,7 +571,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 **对于一个UDP套接字，如果其进程首次调用sendto时，它没有绑定一个本地端口，那么内核就在此时为它选择一个临时端口**
 
-<div align="center"> <img src="../pic/unp-8-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-8-3.png"/> </div>
 
 圆点指明了客户发送UDP数据报时，必须指定或选择的4个值
 
@@ -587,7 +587,7 @@ close会将套接字描述符的引用计数减1，如果引用计数仍大于0�
 
 TCP和UDP服务器上获取**源IP**、**源端口号**、**目的IP**、**目的端口号**的方法：
 
-<div align="center"> <img src="../pic/unp-8-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-8-4.png"/> </div>
 
 * 非连接状态下，同一套接字可以给多个服务器发送数据报
 * 服务器上同一套接字可以从若干不同客户端接收数据报
@@ -596,7 +596,7 @@ TCP和UDP服务器上获取**源IP**、**源端口号**、**目的IP**、**目�
 
 ### 2）连接的UDP套接字
 
-<div align="center"> <img src="../pic/unp-tcp-8.png"/> </div>
+<div align="center"> <img src="./pic/unp-tcp-8.png"/> </div>
 
 * **sockfd**：客户端套接字描述符
 * **servaddr**：包含服务器IP地址和端口号的套接字地址结构
@@ -634,7 +634,7 @@ TCP要再次调用connect必须先close套接字再重新调用socket创建套�
 
 ## 1.select
 
-<div align="center"> <img src="../pic/unp-select-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-select-1.png"/> </div>
 
 * 参数
     - `maxfdp1`：指定待测试的描述符个数，值为待测试的最大描述符加1（参数名的由来）
@@ -681,7 +681,7 @@ int FD_ISSET(int fd,fd_set *fdset);     //检查fdset中的fd位是否置位
     - 套接字上有一个错误，对其写将不会阻塞并返回-1，同时把errno设为确切错误条件
 * **套接字有异常条件待处理**
 
-<div align="center"> <img src="../pic/unp-6-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-6-1.png"/> </div>
 
 > 设置低水位标记
 > * 可以使用SO_RCVLOWAT套接字选项设置套接字接收缓冲区低水位标记（对于TCP和UDP，默认值为1）
@@ -715,43 +715,43 @@ client数组记录与客户端通信的描述符，rset是记录客户端描述�
 
 创建监听套接字并在指定地址进行监听
 
-<div align="center"> <img src="pic/6-1.png"/> </div>
+<div align="center"> <img src="./pic/6-1.png"/> </div>
 
 client和rset状态如下：
 
-<div align="center"> <img src="pic/6-2.png"/> </div>
+<div align="center"> <img src="./pic/6-2.png"/> </div>
 
 #### 2）第一个客户与服务器建立连接时
 
 监听描述符变为可读，服务器于是调用accept。由accept返回的新的已连接描述符将是4
 
-<div align="center"> <img src="pic/6-3.png"/> </div>
+<div align="center"> <img src="./pic/6-3.png"/> </div>
 
 client和rset状态如下：
 
-<div align="center"> <img src="pic/6-4.png"/> </div>
+<div align="center"> <img src="./pic/6-4.png"/> </div>
 
 #### 3）第二个客户与服务器建立连接时
 
 监听描述符变为可读，服务器于是调用accept。由accept返回的新的已连接描述符将是5
 
-<div align="center"> <img src="pic/6-5.png"/> </div>
+<div align="center"> <img src="./pic/6-5.png"/> </div>
 
 client和rset状态如下：
 
-<div align="center"> <img src="pic/6-6.png"/> </div>
+<div align="center"> <img src="./pic/6-6.png"/> </div>
 
 #### 4）第一个客户终止与服务器的连接
 
 客户TCP发送一个FIN，使得服务器中的描述符4变为可读、当服务器读这个已连接套接字时，read将返回0。于是关闭该套接字并更新相应的数据结构
 
-<div align="center"> <img src="pic/6-7.png"/> </div>
+<div align="center"> <img src="./pic/6-7.png"/> </div>
 
 总之，当有客户到达时，在client数组中的第一个可用项（即值为-1的第一个项）中记录其已连接套接字的描述符。还必须把这个已连接描述符加到读描述符集中
 
 ## 2.pselect
 
-<div align="center"> <img src="../pic/unp-select-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-select-2.png"/> </div>
 
 * 参数
     - `maxfdp1`：指定待测试的描述符个数，值为待测试的最大描述符加1（参数名的由来）
@@ -781,10 +781,11 @@ pselect相对于通常的select有2个变化：
 
 ## 3.poll
 
-<div align="center"> <img src="../pic/unp-select-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-select-3.png"/> </div>
 
 * 参数：
     - `fdarray`：指向pollfd数组的指针，每个pollfd结构包含了描述符及其相应事件
+
         ```c
         struct pollfd{
             int   fd;       //监视的描述符
@@ -804,7 +805,7 @@ pselect相对于通常的select有2个变化：
 
 poll中每个描述符有一个监视的事件以及一个发生的事件，在pollfd结构中是类型为short的成员。两个成员中的每一个都由指定某个特定条件的一位或多位构成：
 
-<div align="center"> <img src="../pic/unp-6-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-6-2.png"/> </div>
 
 * 第一部分是**输入**事件的**4个**常值
 * 第二部分是**输出**事件的**3个**常值
@@ -919,7 +920,7 @@ int epoll_wait(int epfd,struct epoll_event *events,int maxevents,int timeout);
 
 #### 1）getsockopt和setsockopt函数
 
-<div align="center"> <img src="../pic/unp-7-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-1.png"/> </div>
 
 * **sockfd**：一个打开的套接字描述符
 * **level**：系统中解释选项的代码。或为通用套接字代码，或为某个特定于协议的代码（IPv4、IPv6、TCP或SCTP）
@@ -931,13 +932,13 @@ int epoll_wait(int epfd,struct epoll_event *events,int maxevents,int timeout);
 
 **level**和**optname**可以取下图中的值：
 
-<div align="center"> <img src="../pic/unp-7-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-7.png"/> </div>
 
 #### 2）fcntl函数
 
 该函数可执行各种**描述符控制操作**，在网络编程中主要关注对套接字描述符的控制操作
 
-<div align="center"> <img src="../pic/unp-7-6.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-6.png"/> </div>
 
 * **fd**：套接字描述符
 * **cmd**：作用于该描述符上的命令
@@ -1013,15 +1014,15 @@ struct linger{
 	* close直到数据和FIN已被服务器主机的TCP确认后才返回（问题是，在服务器应用进程读剩余数据之前，服务器主机可能崩溃，并且客户应用进程永远不会知道。因此，close成功返回只是告诉我们先前发送的数据(和FIN)已由对端TCP确认，而不能告诉我们对端应用进程是否已读取数据）（**图7.8**）
 	* 延滞时间偏低，在接收到服务器主机的TCP确认前close返回（**图7.9**）
 
-<div align="center"> <img src="../pic/unp-7-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-2.png"/> </div>
 
 让客户知道服务器已读取其数据的一个方法是改为调用shutdown(并设置它的第二个参数为SHUT_WR)而不是调用close，并等待对端close连接的服务器端：
 
-<div align="center"> <img src="../pic/unp-7-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-3.png"/> </div>
 
 下图汇总了对shutdown的两种可能调用和对close的三种可能调用，以及它们对TCP套接字的影响：
 
-<div align="center"> <img src="../pic/unp-7-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-4.png"/> </div>
 
 #### 4）SO_RCVBUF和SO_SNDBUF
 
@@ -1091,7 +1092,7 @@ TCP有两个套接字选项，他们的级别为IPPROTO_TCP
 
 考虑一个例子，在Rlogin或Telnet的客户端键入6个字符的串“hello!”，每个字符间间隔正好是250ms。到服务器端的RTT为600ms，而且服务器立即发回每个字符的回显。假设对客户端字符的ACK是和字符回显一同发回给客户端的，并且忽略客户端发送的对服务器端回显的ACK，下图展示了禁止Nagle算法和开启时的情况，在开启时，会感觉到明显的延迟：
 
-<div align="center"> <img src="../pic/unp-7-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-7-5.png"/> </div>
 
 Nagle算法常常与另一个TCP算法联合使用：**ACK延滞算法**，该算法使得TCP在接收到数据后不立即发送ACK，而是等待一小段时间（典型值为50ms~200ms），然后才发送ACK。TCP期待在这一小段时间内自身有数据发送回对端，被延滞的ACK就可以由这些数据捎带，从而省掉一个TCP分节（这种情形对于Rlogin和Telnet客户来说通常可行，因为他们的服务器一般都回显客户发送来的每个字符，这样对客户端字符的ACK完全可以在服务器对该字符的回显中捎带返回；然而对于服务器不在相反方向产生数据以便捎带ACK的客户来说，ACK延滞算法存在问题。这些客户可能觉察到明显的延迟）
 
@@ -1110,13 +1111,13 @@ DNS中的资源记录：
 
 以下是主机freebsd的4个DNS记录：
 
-<div align="center"> <img src="../pic/unp-name-21.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-21.png"/> </div>
 
 ## 1.主机名字与IP地址之间的转换
 
 **可以通过DNS获取名字和地址信息**
 
-<div align="center"> <img src="../pic/unp-name-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-1.png"/> </div>
 
 * 解析器代码通过读取其系统相关配置文件(通常是`/etc/resolv.conf`)确定本组织机构的名字服务器的所在位置
 * 解析器使用UDP向本地名字服务器发出查询，如果本地名字服务器不知道答案，通常会使用UDP在整个因特网上查询其它名字服务器（如果答案太长，超出了UDP消息的承载能力，本地名字服务器和解析器会自动切换到TCP）
@@ -1131,7 +1132,7 @@ DNS中的资源记录：
 
 ### 1）gethostbyname函数
 
-<div align="center"> <img src="../pic/unp-name-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-2.png"/> </div>
 
 函数的局限是**只能返回IPv4地址**，返回的指针指向hostent结构，该结构含有所查找主机的所有IPv4地址：
 
@@ -1145,7 +1146,7 @@ struct hostent{
 };
 ```
 
-<div align="center"> <img src="../pic/unp-name-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-3.png"/> </div>
 
 当发生错误时，函数会设置全局变量h_errno为定义在\<netdb.h\>中的下列常值：
 
@@ -1160,7 +1161,7 @@ struct hostent{
 
 该函数试图由一个二进制的IP地址找到相应的主机名，与gethostbyname的行为相反
 
-<div align="center"> <img src="../pic/unp-name-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-4.png"/> </div>
 
 * **addr**：实际上是一个指向存放IPv4地址的某个in_addr结构的指针
 * **len**：addr指向的in_addr结构的大小（对于IPv4地址为4）
@@ -1174,7 +1175,7 @@ struct hostent{
 
 从服务名字到端口的映射关系通常保存在`/etc/services`文件中，因此如果程序中使用服务名字而非端口号时，即使端口号发生变动，仅需修改这个文件，而不必重新编译应用程序
 
-<div align="center"> <img src="../pic/unp-name-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-5.png"/> </div>
 
 * **servname**：服务名参数，必须指定
 * **protoname**：协议，如果指定了，那么指定的服务必须有匹配的协议（如果protoname未指定而servname服务支持多个协议，那么返回哪个端口号取决于实现）
@@ -1192,7 +1193,7 @@ struct servent{
 
 ### 2）getservbyport函数
 
-<div align="center"> <img src="../pic/unp-name-6.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-6.png"/> </div>
 
 * **port**：端口号，必须为网络字节序
 * **protoname**：指定协议（有些端口号在TCP上用于一种服务，在UDP上却用于完全不同的另一种服务）
@@ -1203,7 +1204,7 @@ struct servent{
 
 getaddrinfo与协议无关，并且能处理**名字到地址**、**服务到端口**这两种转换。返回的不再是地址列表，返回的addrinfo结构中包含了一个指向sockaddr结构的指针，这些sockaddr结构随后可由套接字函数直接使用，因此将协议相关性完全隐藏在函数的内部
 
-<div align="center"> <img src="../pic/unp-name-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-7.png"/> </div>
 
 * **hostname**：主机名或IP地址串
 * **service**：服务名或端口号数串
@@ -1238,7 +1239,7 @@ AI_ADDRCONFIG：按照所在主机的配置选择返回地址类型
 
 如果函数成功，result指向的变量已被填入一个指针，指向的是由ai_next成员串起来的addrinfo结构链表（这些结构的先后顺序没有保证）：
 
-<div align="center"> <img src="../pic/unp-name-8.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-8.png"/> </div>
 
 常见的使用：
 
@@ -1254,19 +1255,19 @@ AI_ADDRCONFIG：按照所在主机的配置选择返回地址类型
 
 下表示是getaddrinfo函数及其行为和结果汇总：
 
-<div align="center"> <img src="../pic/unp-name-22.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-22.png"/> </div>
 
 如果发生**错误**，函数getaddrinfo返回错误值，该值可以作为函数**gai_strerror**的参数。调用gai_strerror函数可以得到一个描述错误信息的C字符串指针：
 
-<div align="center"> <img src="../pic/unp-name-9.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-9.png"/> </div>
 
 常见的错误说明如下表：
 
-<div align="center"> <img src="../pic/unp-name-10.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-10.png"/> </div>
 
 getaddrinfo函数返回的所有**存储空间都是动态获取**的，包括addrinfo结构、ai_addr结构和ai_canonname字符串，可以通过调用**freeaddrinfo**返**还给系统**：
 
-<div align="center"> <img src="../pic/unp-name-11.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-11.png"/> </div>
 
 * **ai**：指向由getaddrinfo返回的第一个addrinfo结构（这个链表中所有的结构以及由它们指向的任何动态存储空间都被释放掉）
 
@@ -1276,7 +1277,7 @@ getaddrinfo函数返回的所有**存储空间都是动态获取**的，包括ad
 
 host_serv封装了函数getaddrinfo，不要求调用者分配并填写一个hints结构，该结构中的**地址族**和**套接字类型**字段作为参数：
 
-<div align="center"> <img src="../pic/unp-name-12.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-12.png"/> </div>
 
 [函数源码](https://github.com/arkingc/unpv13e/blob/master/lib/host_serv.c#L4)
 
@@ -1284,7 +1285,7 @@ host_serv封装了函数getaddrinfo，不要求调用者分配并填写一个hin
 
 tcp_connect执行TCP客户的通常步骤：创建一个TCP套接字并连接到一个服务器
 
-<div align="center"> <img src="../pic/unp-name-13.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-13.png"/> </div>
 
 [函数源代码](https://github.com/arkingc/unpv13e/blob/master/lib/tcp_connect.c#L5)
 
@@ -1294,7 +1295,7 @@ tcp_connect执行TCP客户的通常步骤：创建一个TCP套接字并连接到
 
 tcp_listen执行TCP服务器的通常步骤：创建一个TCP套接字，给它捆绑服务器的众所周知的端口，并允许接受外来的连接请求：
 
-<div align="center"> <img src="../pic/unp-name-14.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-14.png"/> </div>
 
 [函数源代码](https://github.com/arkingc/unpv13e/blob/master/lib/tcp_listen.c#L5)
 
@@ -1305,7 +1306,7 @@ tcp_listen执行TCP服务器的通常步骤：创建一个TCP套接字，给它�
 
 创建未连接UDP套接字：
 
-<div align="center"> <img src="../pic/unp-name-15.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-15.png"/> </div>
 
 * **saptr**：指向的套接字地址结构保存有服务器的IP地址和端口号，用于稍后调用sendto
 * **lenp**：saptr所指的套接字地址结构的大小。不能为空指针，因为任何sendto和recvfrom调用都需要知道套接字地址结构的长度
@@ -1318,7 +1319,7 @@ tcp_listen执行TCP服务器的通常步骤：创建一个TCP套接字，给它�
 
 创建一个已连接UDP套接字：
 
-<div align="center"> <img src="../pic/unp-name-16.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-16.png"/> </div>
 
 因为已连接套接字改用write代替sendto，所以相比于udp_client，省略了套接字地址结构及长度参数
 
@@ -1326,7 +1327,7 @@ tcp_listen执行TCP服务器的通常步骤：创建一个TCP套接字，给它�
 
 ### 7）udp_server函数
 
-<div align="center"> <img src="../pic/unp-name-17.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-17.png"/> </div>
 
 [时间获取程序——使用udp_server的服务器](https://github.com/arkingc/unpv13e/blob/master/names/daytimeudpsrv2.c)（可指定协议）
 
@@ -1336,7 +1337,7 @@ tcp_listen执行TCP服务器的通常步骤：创建一个TCP套接字，给它�
 
 getaddrinfo的互补函数
 
-<div align="center"> <img src="../pic/unp-name-18.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-18.png"/> </div>
 
 * **sockaddr**：指向套接字地址结构，包含了待转换为可读字符串的协议地址
 * **addrlen**：sockaddr指向的套接字地址结构的大小
@@ -1346,7 +1347,7 @@ getaddrinfo的互补函数
 * **servlen**：serv指向的buf的大小（不想获得”服务名“信息则设为0）
 * **flags**：标志，见下表
 
-<div align="center"> <img src="../pic/unp-name-19.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-19.png"/> </div>
 
 ## 5.其它网络相关信息
 
@@ -1358,7 +1359,7 @@ getaddrinfo的互补函数
 
 每类信息都定义了各自的结构：hostent、netent、protoent、servent。这些结构定义在头文件`<netdb.h>`中
 
-<div align="center"> <img src="../pic/unp-name-20.png"/> </div>
+<div align="center"> <img src="./pic/unp-name-20.png"/> </div>
 
 * **只有主机和网络信息可通过DNS获取**，协议和服务信息总是从相应文件中读取
 * 如果使用DNS查找主机和网络信息，只有键值查找函数才有意义。如果调用gethostent，那么它仅仅读取/etc/hosts文件并避免访问DNS
@@ -1370,7 +1371,7 @@ getaddrinfo的互补函数
 
 下图汇总5组I/O函数进行了汇总：
 
-<div align="center"> <img src="../pic/unp-io-8.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-8.png"/> </div>
 
 ## 1.套接字超时
 
@@ -1415,7 +1416,7 @@ getaddrinfo的互补函数
 
 这两个函数与标准的read和write的不同在于第4个参数：
 
-<div align="center"> <img src="../pic/unp-io-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-1.png"/> </div>
 
 * **flag**：或为0或为下图中一个或多个常值的逻辑或：
 
@@ -1432,7 +1433,7 @@ getaddrinfo的互补函数
 
 与标准的read和write不同在于：readv和writev允许单个系统调用读入到或写出自一个或多个缓冲区，这些操作分别称为**分散读**和**集中写**，因为来自读操作的输入数据被分散到多个应用缓冲区中，而来自多个应用缓冲区的输出数据则被集中提供给单个写操作：
 
-<div align="center"> <img src="../pic/unp-io-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-3.png"/> </div>
 
 * **filedes**：文件描述符
 * **iov**：指向某个iovec结构数组的一个指针，iovec结构定义在`<sys/uio.h>`中：
@@ -1447,7 +1448,7 @@ struct iovec{
 
 `iovec`结构和缓冲区的关系：
 
-<div align="center"> <img src="../pic/unp-io-12.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-12.png"/> </div>
 
 * `writev`函数从缓冲区中聚集输出数据的顺序是：iov\[0\]、iov\[1\]直至iov\[iovcnt-1\]
 * `readv`函数则将读入的数据按同样的顺序散步到缓冲区中
@@ -1460,7 +1461,7 @@ struct iovec{
 
 这两个函数是最通用的I/O函数
 
-<div align="center"> <img src="../pic/unp-io-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-4.png"/> </div>
 
 * **msg**：指向一个msghdr结构，这个结构封装了大部分参数：
 
@@ -1498,33 +1499,33 @@ struct msghdr{
 
 下表汇总了内核为输入和输出函数检查的flags参数值以及recvmsg可能返回的msg_flags：
 
-<div align="center"> <img src="../pic/unp-io-5.jpeg"/> </div>
+<div align="center"> <img src="./pic/unp-io-5.jpeg"/> </div>
 
 msghdr结构中的msg_control字段指向一个**辅助数据**，**辅助数据由一个或多个辅助数据对象构成。每个辅助数据对象用一个cmsghdr结构表示**，msg_control指向第一个辅助数据对象，msg_controllen指定了辅助数据(即所以辅助数据对象)的总长度，cmsg_len是包括这个结构在内的字节数：
 
-<div align="center"> <img src="../pic/unp-io-9.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-9.png"/> </div>
 
 cmsg_level和cmsg_type的取值和说明如下表：
 
-<div align="center"> <img src="../pic/unp-io-10.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-10.png"/> </div>
 
 下面5个宏可以对应用程序屏蔽可能出现的填充字节，以简化对辅助数据的处理：
 
-<div align="center"> <img src="../pic/unp-io-11.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-11.png"/> </div>
 
 下面以一个例子说明msghdr结构：
 
 * 假设进程即将对一个UDP套接字调用recvmsg，在调用前为这个套接字设置了IP_RECVDSTADDR套接字选项，以接收所读取UDP数据报的目的IP地址。调用时，msghdr结构如下
 
-<div align="center"> <img src="../pic/unp-io-6.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-6.png"/> </div>
 
 * 接着假设从198.6.38.100端口2000到达一个170字节的UDP数据报，它的目的地址是我们的UDP套接字，目的IP地址为206.168.112.96。recvfrom返回时，msghdr结构如下：
 
-<div align="center"> <img src="../pic/unp-io-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-7.png"/> </div>
 
 ### 5组I/O函数的对比
 
-<div align="center"> <img src="../pic/unp-io-13.png"/> </div>
+<div align="center"> <img src="./pic/unp-io-13.png"/> </div>
 
 ## 4.标准I/O函数
 
@@ -1592,7 +1593,7 @@ SUN_LEN宏以一个指向sockaddr_un结构的指针为参数并返回该结构�
 
 socketpair函数创建2个随后连接起来的套接字：
 
-<div align="center"> <img src="../pic/unp-domain-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-domain-1.png"/> </div>
 
 * **family**：必须为AF_LOCAL
 * **type**：既可以是SOCK_STREAM，也可以是SOCK_DGRAM（使用SOCK_STREAM得到的结果称为流管道，它是全双工的）
@@ -1766,7 +1767,7 @@ socketpair函数创建2个随后连接起来的套接字：
 
 该函数用于创建一个POSIX线程。**当一个程序由exec启动执行时，称为“初始线程”或“主线程”的单个线程就创建了。其余线程则由pthread_create函数创建**
 
-<div align="center"> <img src="../pic/unp-thread-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-1.png"/> </div>
 
 * **tid**：线程ID，数据类型为pthread_t，往往是unsigned int，如果线程成功创建，其ID就通过tid指针返回
 * **attr**：线程属性，包括：优先级、初始栈大小、是否应该成为一个守护线程等。设置为空指针时表示采用默认设置
@@ -1783,7 +1784,7 @@ socketpair函数创建2个随后连接起来的套接字：
 
 pthread_join类似于进程中的waitpid，用于等待一个给定线程的终止
 
-<div align="center"> <img src="../pic/unp-thread-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-2.png"/> </div>
 
 * **tid**：等待终止的线程ID。和进程不同的是，无法等待任意线程，所以不能通过指定ID参数为-1来企图等待任意线程终止
 * **status**：如果该指针非空，来自所等待线程的返回值（一个指向某个对象的指针）将存入由status指向的位置
@@ -1846,13 +1847,13 @@ thread 2 exit code 2
 
 线程可以使用pthread_self获取自身的线程ID，类似于进程中的getpid
 
-<div align="center"> <img src="../pic/unp-thread-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-3.png"/> </div>
 
 **新线程不应该根据主线程调用`pthread_create`函数时传入的`tid`参数来获取自身ID，而是应该调用pthread_self，因为新线程可能在主线程调用`pthread_create`返回之前运行，如果读取`tid`，看到的是未经初始化的内容**
 
 ### 4）pthread_detach函数
 
-<div align="center"> <img src="../pic/unp-thread-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-4.png"/> </div>
 
 该函数把指定的线程转变为**脱离状态**，通常由想让自己脱离的线程调用：```pthread_detach(pthread_self());```
 
@@ -1865,7 +1866,7 @@ thread 2 exit code 2
 
 线程终止的**一个方法**：
 
-<div align="center"> <img src="../pic/unp-thread-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-5.png"/> </div>
 
 * **status**：不能指向一个局部于调用线程的对象，因为线程终止时这样的对象也消失
 
@@ -1958,7 +1959,7 @@ parent:
 
 ### 6）pthread_equal函数
 
-<div align="center"> <img src="../pic/unp-thread-14.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-14.png"/> </div>
 
 线程ID是用`pthread_t`数据类型来表示的，实现的时候可以用一个结构来表示该数据类型，所以可移植的操作系统实现不能把它作为整数处理。因此必须使用一个函数来对两个线程ID进程比较
 
@@ -1976,7 +1977,7 @@ parent:
 
 以下函数被线程调用时，可以添加或清除清理函数：
 
-<div align="center"> <img src="../pic/unp-thread-16.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-16.png"/> </div>
 
 > 这2个函数可以被实现为宏，通常pthread_cleanup_push会带有一个`{`，而pthread_cleanup_pop会带有1个'}'。因此，在使用时，2个函数应该配对出现
 
@@ -2063,7 +2064,7 @@ int main()
 
 除了下图列出的函数外，POSIX.1要求由POSIX.1和ANSI C标准定义的所有函数都是线程安全的：
 
-<div align="center"> <img src="../pic/unp-thread-6.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-6.png"/> </div>
 
 POSIX未就网络编程API函数的线程安全性作出任何规定。表中最后5行来源于Unix98。gethostbyname和gethostbyaddr具有不可重入性质。尽管一些厂家定义了这两个函数以_r结尾其名字的线程安全版本，不过这些线程安全函数没有标准可循，应该避免使用
 
@@ -2091,7 +2092,7 @@ POSIX未就网络编程API函数的线程安全性作出任何规定。表中最
 
 **每个系统支持有限数量的线程特定数据元素，POSIX要求这个限制不小于128(每个进程)**，**系统**为**每个进程**维护一个称之为Key结构的数组，如下图：
 
-<div align="center"> <img src="../pic/unp-thread-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-7.png"/> </div>
 
  * **标志**：指示这个数组元素是否正在使用（所有标志初始化为”不在使用“）
 
@@ -2114,7 +2115,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 1）pthread_once和pthread_key_create函数
 
-<div align="center"> <img src="../pic/unp-thread-9.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-9.png"/> </div>
 
 **pthread_key_create函数**：
 
@@ -2141,14 +2142,14 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 2）pthread_getspecific和pthread_setspecific函数
 
-<div align="center"> <img src="../pic/unp-thread-10.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-10.png"/> </div>
 
 * pthread_getspecific函数返回对应指定键的指针
 * pthread_setspecific函数在Pthread结构中把对应指定键的指针设置为指向分配的内存
 
 ### 3）pthread_key_delete函数
 
-<div align="center"> <img src="../pic/apue-threadctr-21.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-21.png"/> </div>
 
 该函数用来取消键与线程特定数据值之间的关联。它并不会激活与键关联的析构函数。要释放任何与键关联的线程特定数据值的内存，需要在应用程序中采取额外的步骤
 
@@ -2161,7 +2162,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 1）pthread_mutex_lock和pthread_mutex_unlock函数
 
-<div align="center"> <img src="../pic/unp-thread-11.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-11.png"/> </div>
 
 * **mptr**
     - **pthread_mutex_lock**锁住mptr指向的互斥锁
@@ -2177,7 +2178,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 1）pthread_cond_wait和pthread_cond_signal函数
 
-<div align="center"> <img src="../pic/unp-thread-12.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-12.png"/> </div>
 
 * **pthread_cond_wait**函数等待cptr指向的条件变量，投入睡眠之前会释放mptr指向的互斥锁，唤醒后会重新获得mptr指向的互斥锁
 * **pthread_cond_signal**唤醒等待cptr指向的条件变量
@@ -2186,7 +2187,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 2）pthread_cond_broadcast和pthread_cond_timedwait函数
 
-<div align="center"> <img src="../pic/unp-thread-13.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-13.png"/> </div>
 
 * **pthread_cond_broadcast**：有时候一个线程应该唤醒多个线程，这种情况下它可以调用该函数唤醒在相应条件变量上的所有线程
 * **pthread_cond_timedwait**：允许线程设置一个阻塞时间的限制。如果超时，返回ETIME错误。这个时间值是一个绝对时间，而不是一个时间增量。也就是说abstime参数是函数应该返回时刻的系统时间——从1970年1月1日UTC时间以来的秒数和纳秒数
@@ -2245,7 +2246,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 不同版本服务器的性能：
 
-<div align="center"> <img src="../pic/unp-design-2.jpeg"/> </div>
+<div align="center"> <img src="./pic/unp-design-2.jpeg"/> </div>
 
 每个服务器子进程/线程处理的客户数的分布：
 
@@ -2272,7 +2273,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 惊群问题的规模与影响：
 
-<div align="center"> <img src="../pic/unp-design-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-design-3.png"/> </div>
 
 #### 内核如何实现多个子进程在同一监听描述符上调用accept？
 
@@ -2280,7 +2281,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 父进程在派生任何子进程之前创建监听套接字，每次调用fork时，所有描述符也被复制：
 
-<div align="center"> <img src="../pic/unp-design-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-design-1.png"/> </div>
 
 描述符只是本进程引用file结构的proc结构中一个数组中某个元素的下标而已。子进程中一个给定描述符引用的file结构正是父进程中同一个描述符引用的file结构。每个file结构都有一个引用计数
 
@@ -2422,7 +2423,7 @@ ctrl+d键入EOF，客户端fget返回空指针，str\_cli函数返回，在客�
 * 1）子进程打开的所有描述符随之关闭。由子进程来关闭已连接套接字会引发TCP连接终止序列的最后两次挥手；
 * 2）子进程终止时，给父进程发生一个SIGCHLD信号，这一版本的服务器没有在代码中捕获这个信号，而该信号的默认行为是被忽略。因此子进程进入僵尸状态
 
-<div align="center"> <img src="pic/5-1.png"/> </div>
+<div align="center"> <img src="./pic/5-1.png"/> </div>
 
 > 问题：服务器子进程会变成僵尸进程
 
@@ -2482,11 +2483,11 @@ pid_t waitpid(pid_t pid,int *statloc,int options);
 
 现在考虑下面的例子：客户端发起5个到服务器的连接，并且仅用第一个连接进行“回射”：
 
-<div align="center"> <img src="pic/5-2.png"/> </div>
+<div align="center"> <img src="./pic/5-2.png"/> </div>
 
 当回射结束在终端输入EOF(ctrl+d)时，程序退出，因此5和客户端有关的描述符都将被内核关闭，因此5个连接基本在同一时刻引发5个FIN，这会导致服务器处理5个连接的5个子进程基本在同一时刻终止，因此又导致差不多在同一时刻有5个SIGCHLD信号递交给父进程：
 
-<div align="center"> <img src="pic/5-3.png"/> </div>
+<div align="center"> <img src="./pic/5-3.png"/> </div>
 
 看看现在系统上的进程：
 
@@ -2514,7 +2515,7 @@ sig_chld(int signo)
 
 accept返回前连接终止的情况在较忙的服务器（典型的如Web服务器）上已出现过，这种情况如下图所示：
 
-<div align="center"> <img src="pic/5-5.png"/> </div>
+<div align="center"> <img src="./pic/5-5.png"/> </div>
 
 三路握手完成从而连接建立之后，客户TCP却发送了一个RST(复位)。在服务器端看来，就在该连接已由TCP排队，等着服务器进程调用accept的时候RST到达。在这之后，服务器进程才调用accept
 
@@ -2527,13 +2528,13 @@ accept返回前连接终止的情况在较忙的服务器（典型的如Web服�
 
 假设在客户端与服务器建立起一条连接之后，当客户端调用fget阻塞于控制台输入时，服务器处理客户端请求的子进程被杀死，这个时候客户端会发生什么
 
-<div align="center"> <img src="pic/5-6.png"/> </div>
+<div align="center"> <img src="./pic/5-6.png"/> </div>
 
 kill掉服务器子进程后，子进程打开的所有描述符都被关闭。导致向客户发送一个FIN，而客户TCP则响应一个ACK，这就是TCP连接终止工作的前半部分
 
 此时，在客户端上再键入一行文本，客户端输出以下内容后退出：
 
-<div align="center"> <img src="pic/5-7.png"/> </div>
+<div align="center"> <img src="./pic/5-7.png"/> </div>
 
 当键入一行新文本时，str_cli调用writen，客户TCP连接把数据发送给服务器。TCP允许这么做。因为客户端TCP接收到FIN只是表示服务器进程已关闭了连接的服务器端，从而不再往其中发送任何数据而已。FIN的接收并没有告诉客户TCP服务器进程已经终止（本例中确实是终止了）
 
@@ -2579,7 +2580,7 @@ str_cli(FILE *fp, int sockfd)
 可以使用tcpdump观察网络，会发现**客户TCP持续重传数据分节，试图从服务器上接收一个ACK**：
 
 * 源自Berkeley的实现重传该数据分节12次，共等待9分钟才放弃重传
- 
+
 当客户TCP最后终于放弃时，给客户进程返回一个错误。既然客户阻塞在readline调用上，该调用将返回一个错误。假设服务器主机已崩溃，从而对客户的数据分节根本没有响应，那么所返回的错误是ETIMEDOUT。然而如果某个中间路由器判断服务器主机已不可达，从而响应一个“destination unreachable”(目的地不可达)ICMP消息，那么所返回的错误是EHOSTUNREACH或ENETUNREACH
 
 * **尽管最终会发现服务器已经崩溃或不可达，但是必须等待一个时间，因此需要对readline调用设置一个超时**
@@ -2691,11 +2692,11 @@ recvfrom返回的IP地址不是发送数据报的目的IP地址。当服务器�
 
 启动UDP回射服务器客户端，指定服务器IP为本主机，然后键入hello，由于服务器并没有启动，所以没有回射信息，客户此时阻塞于recvfrom：
 
-<div align="center"> <img src="pic/8-2.png"/> </div>
+<div align="center"> <img src="./pic/8-2.png"/> </div>
 
 本地使用tcpdump抓包：
 
-<div align="center"> <img src="pic/8-1.png"/> </div>
+<div align="center"> <img src="./pic/8-1.png"/> </div>
 
 从抓取到的数据包可以看出，客户端向localhost的9877号端口发送数据，然后由于相应服务器未启动，所以localhost发送一个ICMP消息，响应目的主机不可达，我们称这个ICMP错误为**异步错误**，该错误由sendto引起，但是sendto本身却成功返回（sendto的成功返回仅仅表示在接口输出队列中具有存放所形成IP数据报的空间）。由于sendto成功返回，但是ICMP错误直到后来才返回，所以称其为异步
 
