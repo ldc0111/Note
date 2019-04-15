@@ -46,15 +46,15 @@
 
 - [-I-](#-I-)
 
-- [-idirafter dir](#-idirafter dir)
+- [-idirafter dir](#-idirafterdir)
 
-- [-iprefix prefix](#-iprefix prefix)
+- [-iprefix prefix](#-iprefixprefix)
 
-- [-iwithprefix dir](#-iwithprefix dir)
+- [-iwithprefix dir](#-iwithprefixdir)
 
 - [-nostdinc](#-nostdinc)
 
-- [-nostdin C++](#-nostdin C++)
+- [-nostdin C++](#-nostdinC++)
 
 - [-C](#-C)
 
