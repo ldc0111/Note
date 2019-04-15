@@ -43,6 +43,7 @@
 > git config --global user.email       # 查看
 > git config --global user.email 邮箱   # 修改
 > git config -l #查看
+> git config --global core.quotepath false #git status 乱码解决
 > ```
 >
 
