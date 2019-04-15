@@ -1,6 +1,6 @@
-- [-x language filename](#-x language filename)
+- [-x language filename](#-xlanguagefilename)
 
-- [-x none filename](#-x none filename)
+- [-x none filename](#-xnonefilename)
 
 - [-c](#-c)
 
