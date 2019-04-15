@@ -30,9 +30,9 @@
 
 - [-fno-unsigned-char](#-fno-unsigned-char)
 
-- [-include file](#-include file)
+- [-include file](#-includefile)
 
-- [-imacros file](#-imacros file)
+- [-imacros file](#-imacrosfile)
 
 - [-Dmacro](#-Dmacro)
 
