@@ -5,7 +5,7 @@
 <br>
 <br>
 
-<div align="center"> <img src="../pic/apue-basic-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-basic-1.png"/> </div>
 
 <br>
 <br>
@@ -101,7 +101,7 @@
     - [7.Core Dump](#7core-dump)（外加）
         + [7.1 Core Dump的概念及用途](#71-core-dump的概念及用途)
         + [7.2 产生Core Dump](#72-产生core-dump)
-        + [7.3 调试Core Dump](#73-调试core-dump)
+        + <div align="center"> <img src="./pic/kernel-blockio-3.png"/> </div>
 
 <h2 id="ch5"></h2>
 
@@ -230,7 +230,7 @@
 <br>
 
 # 一.文件I/O
-  
+
 本章描述的函数经常被称为**不带缓冲的I/O**，不带缓冲值的是每个read和write都调用内核中的一个系统调用。这些不带缓冲的I/O函数不是ISO C的组成部分，它们是POSIX.1和Single UNIX Specification的组成部分
 
 ## 1.文件描述符
@@ -245,7 +245,7 @@
 
 ### 复制文件描述符
 
-<div align="center"> <img src="../pic/apue-fileio-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-10.png"/> </div>
 
 * 对于`dup`函数
     - 返回的新的文件描述符一定是当前可用的文件描述符中最小的数字
@@ -255,7 +255,7 @@
 
 这些函数返回的新文件描述符与参数fd共享同一个文件表项：
 
-<div align="center"> <img src="../pic/apue-fileio-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-11.png"/> </div>
 
 <br>
 
@@ -263,7 +263,7 @@
 
 ### 2.1 打开文件
 
-<div align="center"> <img src="../pic/apue-fileio-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-1.png"/> </div>
 
 * 参数：
     * `path`:要打开或者创建文件的名字
@@ -309,7 +309,7 @@
 
 ### 2.2 创建文件
 
-<div align="center"> <img src="../pic/apue-fileio-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-2.png"/> </div>
 
 * 参数：
     * `path`:要创建文件的名字
@@ -332,7 +332,7 @@
 
 ### 2.3 关闭文件
 
-<div align="center"> <img src="../pic/apue-fileio-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-3.png"/> </div>
 
 注意：
 
@@ -341,7 +341,7 @@
 
 ### 2.4 定位读写位置
 
-<div align="center"> <img src="../pic/apue-fileio-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-4.png"/> </div>
 
 * 参数：
     * `fd`：打开的文件的文件描述符
@@ -361,7 +361,7 @@
 
 ### 2.5 文件读
 
-<div align="center"> <img src="../pic/apue-fileio-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-5.png"/> </div>
 
 * 参数：
     * `fd`：打开的文件的文件描述符
@@ -381,7 +381,7 @@
 
 ### 2.6 文件写
 
-<div align="center"> <img src="../pic/apue-fileio-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-6.png"/> </div>
 
 * 参数：
     * `fd`：打开的文件的文件描述符
@@ -396,7 +396,7 @@
 
 fcntl可以改变已经打开文件的属性
 
-<div align="center"> <img src="../pic/apue-fileio-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-13.png"/> </div>
 
 * 参数：
     * `fd`：已打开文件的描述符
@@ -423,7 +423,7 @@ fcntl可以改变已经打开文件的属性
 
 ## 3.进程间文件共享
 
-<div align="center"> <img src="../pic/apue-fileio-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-14.png"/> </div>
 
 UNIX系统支持在不同进程间共享打开文件。内核使用3种数据结构描述打开文件。它们之间的关系决定了在文件共享方面一个进程对另一个进程可能产生的影响
 
@@ -439,11 +439,11 @@ UNIX系统支持在不同进程间共享打开文件。内核使用3种数据结
     * 对于大多数文件， v 结点还包含了该文件的 i 结点
     **这些信息都是在打开文件时从磁盘读入内存的**。如 i 结点包含了文件的所有者、文件长度、指向文件实际数据在磁盘上所在位置的指针等等。 v 结点结构和 i 结点结构实际上代表了文件的实体（**Linux没有使用v节点，而是使用了通用i节点结构。虽然两种实现有所不同，但在概念上，v节点与i节点是一样的，两者都指向文件系统特有的i节点结构**）
 
-<div align="center"> <img src="../pic/apue-fileio-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-7.png"/> </div>
 
 现在假设进程 A 打开文件 `file1`，返回文件描述符 3；进程 B 也打开文件 `file1`，返回文件描述符 4：
 
-<div align="center"> <img src="../pic/apue-fileio-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-8.png"/> </div>
 
 内核在文件表上新增两个表项：
 
@@ -471,7 +471,7 @@ UNIX提供了一种原子操作方法：通过 `O_APPEND`选项打开文件。�
 
 ### 定位读和定位写
 
-<div align="center"> <img src="../pic/apue-fileio-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-9.png"/> </div>
 
 * 参数：
     * `fd`：打开的文件描述符
@@ -494,7 +494,7 @@ UNIX操作系统在内核中设有**缓冲区高速缓存**或**页高速缓存*
 - 当内核需要重用缓冲区来存放其他数据时，它会把所有延迟写的数据库写入磁盘
 - 可以调用`sync`、`fsync`或`fdatasync`来显式的将所有延迟写的数据块写回磁盘
 
-<div align="center"> <img src="../pic/apue-fileio-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-fileio-12.png"/> </div>
 
 * 参数（前两个函数）：
     * `fd`：指定写回的文件
@@ -522,11 +522,11 @@ UNIX操作系统在内核中设有**缓冲区高速缓存**或**页高速缓存*
 
 inode是固定长度的记录项，包含有关文件的大部分信息
 
-<div align="center"> <img src="../pic/apue-filestat-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-13.png"/> </div>
 
 可以进一步分析inode和数据块部分：
 
-<div align="center"> <img src="../pic/apue-filestat-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-14.png"/> </div>
 
 * 每个inode中有一个链接数，其值为指向该inode的目录项数（上图中有两个目录项指向同一个inode）。只有当链接数减为0时，才删除该文件。链接数包含在`stat`结构的`st_nlink`成员中（POSIX.1常量`LINK_MAX`指定了一个文件链接数的最大值）。**这种链接类型称为硬链接**
 * 另外一种链接类型称为**符号链接**。符号链接文件的实际内容（在数据块中）包含了该符号链接所指向的文件的名字
@@ -536,11 +536,11 @@ inode是固定长度的记录项，包含有关文件的大部分信息
 
 下图为在一个目录下创建一个目录testdir，注意testdir所在目录，以及新建目录testdir的inode链接数：
 
-<div align="center"> <img src="../pic/apue-filestat-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-15.png"/> </div>
 
 ## 1.获取文件信息
 
-<div align="center"> <img src="../pic/apue-filestat-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-1.png"/> </div>
 
 * **stat**：获得与`pathname`文件有关的信息结构，存在`buf`中
 * **fstat**：获得已在描述符`fd`上打开文件的有关信息，存在`buf`中
@@ -597,11 +597,11 @@ long   tv_nsec;
 
 文件类型信息包含在`stat`结构的`st_mode`成员中。可以使用下图的宏判断文件类型（传入`st_mode`）：
 
-<div align="center"> <img src="../pic/apue-filestat-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-2.png"/> </div>
 
 POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图的宏可以确定IPC对象的类型（传入`stat`结构的指针）
 
-<div align="center"> <img src="../pic/apue-filestat-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-3.png"/> </div>
 
 <br>
 
@@ -611,7 +611,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 与一个**进程**相关联的ID有6个或更多，下图是用户ID和组ID
 
-<div align="center"> <img src="../pic/apue-filestat-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-4.png"/> </div>
 
 * **实际用户ID和组ID**：标识我们究竟是谁。这两个字段在登录时取自口令文件中的登录项。通常在一个登录会话期间这些值并不改变，但是超级用户进程有办法改变它们
 * **有效用户ID、有效组ID以及附属组ID**：决定了我们的**文件访问权限**
@@ -626,7 +626,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 如果`owner`或`group`中的任意一个是-1，则对应的ID不变：
 
-<div align="center"> <img src="../pic/apue-filestat-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-11.png"/> </div>
 
 * **chown函数**
 * **fchown函数**：更改`fd`参数指向的打开文件的用户ID和组ID（既然在一个已打开的文件上操作，就不能用于改变符号链接的所有者）
@@ -649,7 +649,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 下图列出了文件访问权限的所有权限位，以及它们对普通文件和目录文件的作用：
 
-<div align="center"> <img src="../pic/apue-filestat-31.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-31.png"/> </div>
 
 最后9个常量还可以分成如下3组：
 
@@ -661,7 +661,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 文件`stat`结构的`st_mode`成员除了包含**设置用户ID位**和**设置组ID位**用以修改进程的**有效用户ID**和**有效组ID**，还包含9个文件访问权限的位，**这些权限位指明了所有者、组和其他对于该文件的访问权限**，可分为3类：
 
-<div align="center"> <img src="../pic/apue-filestat-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-5.png"/> </div>
 
 任何文件类型都有访问权限
 
@@ -688,7 +688,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 如果进程希望按照其**实际用户ID**和**实际组ID**来测试其访问能力，那么可以使用下列函数（进程使用**实际用户ID**和**实际组ID**来测试其访问能力也分成4步，与上面相同）：
 
-<div align="center"> <img src="../pic/apue-filestat-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-6.png"/> </div>
 
 * `mode`：欲测试的权限位标志（可以是下列值按位或）
     - `F_OK`：测试文件是否已经存在
@@ -706,7 +706,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 可以使用`umask`函数为进程设置**文件模式创建屏蔽字**，并返回之前的值：
 
-<div align="center"> <img src="../pic/apue-filestat-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-7.png"/> </div>
 
 * `cmask`：同[open函数的mode参数](#21-打开文件)，是9个常量的若干个按位”或“的值
 
@@ -716,11 +716,11 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 下图为八进制的屏蔽位和含义：
 
-<div align="center"> <img src="../pic/apue-filestat-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-8.png"/> </div>
 
 ### 4.3 修改文件访问权限
 
-<div align="center"> <img src="../pic/apue-filestat-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-9.png"/> </div>
 
 * **chmod函数**：对文件`pathname`进行修改
 * **fchmod函数**：对已打开的文件(`fd`指定)进行修改
@@ -730,7 +730,8 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
         + `fd`参数为`AT_FDCWD`而`pathname`为相对路径
     - `flag`设置了`AT_SYMLINK_NOFOLLOW`标志时，不会跟随符号链接
 * `mode`参数是下图常量（定义在`<sys/stat.h>`中）的按位或（图中进位的9个常量是open函数`mode`参数使用的9个常量）
-    <div align="center"> <img src="../pic/apue-filestat-10.png"/> </div>
+
+    <div align="center"> <img src="./pic/apue-filestat-10.png"/> </div>
 
 **修改文件的权限位的前提是：进程的有效用户ID必须等于文件的所有者ID，或者进程必须具有超级用户权限**
 
@@ -788,7 +789,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 下列函数可以截断文件：
 
-<div align="center"> <img src="../pic/apue-filestat-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-12.png"/> </div>
 
 * `length`
     - `<文件长度`：文件超过length以外的数据就不再能访问
@@ -800,7 +801,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 ### 8.1 创建硬链接
 
-<div align="center"> <img src="../pic/apue-filestat-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-16.png"/> </div>
 
 * **link函数**
     - `existingpath`：现有文件
@@ -828,7 +829,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 要删除硬链接，必须对包含该目录项(硬链接)的目录具有**写和执行权限**
 
-<div align="center"> <img src="../pic/apue-filestat-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-17.png"/> </div>
 
 * 如果`flag`参数设置了`AT_REMOVEDIR`标志位，那么**unlinkat**函数可以类似于**rmdir**一样删除目录；否则，函数**unlinkat**与**unlink**执行同样的操作
 * **如果`pathname`是符号链接，那么unlink删除该符号链接，而不是删除由该链接所引用的文件**（即，不跟随符号链接）（给出符号链接名的情况下，没有一个函数能删除由该链接所引用的文件）
@@ -850,7 +851,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 也可以用remove函数（c库函数）解除对一个文件或目录的链接：
 
-<div align="center"> <img src="../pic/apue-filestat-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-18.png"/> </div>
 
 * 对于文件，remove的功能与unlink相同
 * 对于目录，remove的功能与rmdir相同
@@ -868,7 +869,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 下图指明当传入的文件名表示一个符号链接时，函数能否跟随符号链接处理其链接的目标文件：
 
-<div align="center"> <img src="../pic/apue-filestat-20.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-20.png"/> </div>
 
 上图没有mkdir、mkinfo、mknod和rmdir，因为当这些函数的路径名是符号链接时，函数出错返回
 
@@ -876,7 +877,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 ### 9.1 创建符号链接
 
-<div align="center"> <img src="../pic/apue-filestat-21.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-21.png"/> </div>
 
 * **symlink函数**：创建一个指向`actualpath`的新目录项`sympath`。在创建此符号链接时，并不要求`actualpath`已经存在。并且，`actualpath`和`sympath`并不需要位于同一文件系统中
 * **symlinkat函数**：类似。但`sympath`参数根据相对于打开文件描述符`fd`引用的目录进行计算。如果`sympath`参数指定的是绝对路径或者`fd`参数设置了`AT_FDCWD`值，那么该函数就等同于**symlink**
@@ -885,7 +886,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 因为open函数跟随符号链接，所以需要一种方法打开该链接本身，并读该链接中的名字。下列函数提供了这种功能：
 
-<div align="center"> <img src="../pic/apue-filestat-22.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-22.png"/> </div>
 
 * 当`pathname`参数指定的是绝对路径名或者`fd`参数的值为`AT_FDCWD`，**readlinkat**函数的行为与**readlink**相同。但是，如果`fd`参数是一个打开目录的有效文件描述符并且`pathname`参数是相对路径，则**readlinkat**计算相对于由`fd`代表的打开目录的路径名
 
@@ -897,7 +898,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 ### 10.1 创建目录
 
-<div align="center"> <img src="../pic/apue-filestat-26.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-26.png"/> </div>
 
 * **mkdirat函数**与**mkdir函数**类似，当`fd`参数具有特殊值`AT_FDCWD`或者`pathname`参数指定了绝对路径名时，两个函数完全一样。否则，`fd`参数是一个打开的目录，相对路径名根据此打开目录进行计算
 
@@ -905,7 +906,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 ### 10.2 删除目录
 
-<div align="center"> <img src="../pic/apue-filestat-27.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-27.png"/> </div>
 
 * 如果调用此函数使目录的链接数成为0，并且也没有其它进程打开此目录，则释放由此目录占用的空间
 * 如果在链接数到达0时，有1个或多个进程打开此目录，则在此函数返回前删除最后一个链接及`.`和`..`项。另外，在此目录中不能再创建新文件。但是在最后一个进程关闭它之前并不释放此目录
@@ -914,7 +915,7 @@ POSIX.1允许实现将进程间通信(IPC)对象说明为文件。通过下图�
 
 对某个目录具有访问权限的任一用户都可以读该目录，但是，为了防止文件系统产生混乱，只有内核才能写目录
 
-<div align="center"> <img src="../pic/apue-filestat-28.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-28.png"/> </div>
 
 * **fdopendir函数**：打开`fd`表示的目录，得到相应的`DIR`结构
 * **telldir函数**和**seekdir函数**不是基本POSIX.1标准的组成部分。它们是Single UNIX Specification中的XSI扩展。所以可以期望所有符合UNIX系统的实现都会提供这2个函数
@@ -944,13 +945,13 @@ struct dirent{
 
 下列2个函数可以更改当前工作目录：
 
-<div align="center"> <img src="../pic/apue-filestat-29.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-29.png"/> </div>
 
 这两个函数分别用`pathname`或打开文件描述符`fd`来指定新的当前工作目录
 
 ### 10.5 获取当前目录的绝对路径
 
-<div align="center"> <img src="../pic/apue-filestat-30.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-30.png"/> </div>
 
 * `buf`：存放绝对路径的缓冲区地址
 * `size`：缓冲区的长度（缓冲区必须有足够的长度以容纳绝对路径名再加上一个终止null字节）
@@ -959,7 +960,7 @@ struct dirent{
 
 ## 11.重命名
 
-<div align="center"> <img src="../pic/apue-filestat-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-19.png"/> </div>
 
 * 如果`oldname`指的是一个文件(而不是目录)，并且`newname`已经存在，且不是一个目录
     - 先将该目录项删除，然后将`oldname`重命名为`newname`。对包含`oldname`的目录以及包含`newname`的目录，调用进程必须具有写权限
@@ -978,13 +979,13 @@ struct dirent{
 
 对每个文件维护3个时间字段，他们的意义如下图：
 
-<div align="center"> <img src="../pic/apue-filestat-23.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-23.png"/> </div>
 
 ### 12.1 更改文件的访问和修改时间
 
 下列2个函数包含在POSIX.1中，可以指定**纳秒级精度**的时间戳：
 
-<div align="center"> <img src="../pic/apue-filestat-24.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-24.png"/> </div>
 
 * `times`：日历时间，自特定时间（1970年1月1日00:00:00）以来所经过的时间
     - `times[0]`：包含访问时间
@@ -1007,7 +1008,7 @@ struct dirent{
 
 下列函数包含在Single UNIX Specification的XSI扩展选项中，时间戳是用**秒和微妙**表示的：
 
-<div align="center"> <img src="../pic/apue-filestat-25.png"/> </div>
+<div align="center"> <img src="./pic/apue-filestat-25.png"/> </div>
 
 * `times`
     - `times[0]`：包含访问时间
@@ -1191,7 +1192,7 @@ dev = 8/3
     - [freopen](#41-打开流)：清除一个流的定向
     - `fwide`：设置流的定向（并不改变已定向流的定向）
 
-<div align="center"> <img src="../pic/apue-standardio-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-1.png"/> </div>
 
 * 参数：
     * `fp`：`FILE`文件对象的指针
@@ -1226,7 +1227,7 @@ dev = 8/3
 
 `FILE`对象包含有文件描述符，标准I/O函数可以看作是对fd直接操作的系统调用的封装，优点是带有I/O缓冲，从而减少系统调用的次数：
 
-<div align="center"> <img src="../pic/apue-standardio-29.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-29.png"/> </div>
 
 <br>
 
@@ -1248,7 +1249,7 @@ dev = 8/3
 
 下列函数可以**设置流的缓冲类型**：
 
-<div align="center"> <img src="../pic/apue-standardio-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-2.png"/> </div>
 
 * 参数：
     * `fp`：被打开的文件对象的指针
@@ -1259,7 +1260,7 @@ dev = 8/3
         * `_IONBF`：**不带缓冲**。此时忽略`buf`和`size`参数
     * `size`：缓冲的长度
 
-<div align="center"> <img src="../pic/apue-standardio-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-3.png"/> </div>
 
 注意：
 
@@ -1272,7 +1273,7 @@ dev = 8/3
 * 缓冲区可以由标准的I/O操作自动地冲洗（如，当填满一个缓冲区时）
 * 也可以手动调用fflush函数冲洗一个流
 
-<div align="center"> <img src="../pic/apue-standardio-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-4.png"/> </div>
 
 * 参数：
     * `fp`：被打开的文件对象的指针（`fp`为`NULL`时，此函数将导致所有输出流被冲洗）
@@ -1295,7 +1296,7 @@ dev = 8/3
 
 ### 4.1 打开流
 
-<div align="center"> <img src="../pic/apue-standardio-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-5.png"/> </div>
 
 - 参数：
     + `type`：指定对该I/O流的读写方式（具体见下图）
@@ -1305,7 +1306,7 @@ dev = 8/3
     + `fp`：指定的流（若`fp`已经打开，则先关闭该流；若`fp`已经定向，则清除该定向）
     + `fd`：指定的文件描述符。获得的标准I/O流将与该描述符结合
 
-<div align="center"> <img src="../pic/apue-standardio-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-6.png"/> </div>
 
 这**几个函数的常见用途**：
 
@@ -1322,7 +1323,7 @@ dev = 8/3
 
 ### 4.2 关闭流
 
-<div align="center"> <img src="../pic/apue-standardio-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-7.png"/> </div>
 
 * 参数：
     * `fp`：待关闭的文件指针
@@ -1353,7 +1354,7 @@ dev = 8/3
 
 #### 1）每次读一个字符
 
-<div align="center"> <img src="../pic/apue-standardio-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-8.png"/> </div>
 
 * 参数：
     * `fp`：文件对象指针
@@ -1371,7 +1372,7 @@ dev = 8/3
 
 上述3个函数不管是出错还是到达文件尾端，都返回相同值，下面的函数可以进行区分
 
-<div align="center"> <img src="../pic/apue-standardio-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-9.png"/> </div>
 
 * 参数：
     * `fp`：文件对象指针
@@ -1380,7 +1381,7 @@ dev = 8/3
 
 #### 3）将读取字符压回流中
 
-<div align="center"> <img src="../pic/apue-standardio-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-10.png"/> </div>
 
 * 参数：
     * `c`：待压入字符转换成的整数值
@@ -1398,7 +1399,7 @@ dev = 8/3
 
 #### 4）每次写一个字符
 
-<div align="center"> <img src="../pic/apue-standardio-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-11.png"/> </div>
 
 * 参数：
     * `c`：待写字符转换成的整数值
@@ -1411,7 +1412,7 @@ dev = 8/3
 
 #### 5）每次读一行
 
-<div align="center"> <img src="../pic/apue-standardio-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-12.png"/> </div>
 
 * 参数：
     * `buf`：存放读取到的字符的缓冲区地址
@@ -1428,7 +1429,7 @@ dev = 8/3
 
 #### 6）每次写一行
 
-<div align="center"> <img src="../pic/apue-standardio-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-13.png"/> </div>
 
 * 参数：
     * `str`：待写的字符串
@@ -1441,7 +1442,7 @@ dev = 8/3
 
 #### 7）二进制I/O
 
-<div align="center"> <img src="../pic/apue-standardio-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-14.png"/> </div>
 
 * 参数：
     * `ptr`:存放二进制数据对象的缓冲区地址
@@ -1470,7 +1471,7 @@ dev = 8/3
 
 #### 1）ftell与fseek
 
-<div align="center"> <img src="../pic/apue-standardio-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-15.png"/> </div>
 
 * 对于二进制文件
     - 其文件位置指示器是从文件起始位置开始度量，并以字节为度量单位
@@ -1484,13 +1485,13 @@ rewind函数也可以将一个流设置到文件的起始位置
 
 #### 2）ftello与fseeko
 
-<div align="center"> <img src="../pic/apue-standardio-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-16.png"/> </div>
 
 除了偏移量的类型是off_t而非long，`ftello`函数与`ftell`相同，`fseeko`函数与`fseek`相同
 
 #### 3）fgetpos与fsetpos
 
-<div align="center"> <img src="../pic/apue-standardio-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-17.png"/> </div>
 
 `fgetpos`和`fsetpos`都是ISO C标准引入的
 
@@ -1500,7 +1501,7 @@ rewind函数也可以将一个流设置到文件的起始位置
 
 #### 1）格式化输出
 
-<div align="center"> <img src="../pic/apue-standardio-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-18.png"/> </div>
 
 * `printf` 将格式化数据写到标准输出
 * `fprintf` 写至指定的流
@@ -1512,7 +1513,7 @@ rewind函数也可以将一个流设置到文件的起始位置
 
 * 标志(flags)
 
-<div align="center"> <img src="../pic/apue-standardio-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-19.png"/> </div>
 
 * 最小字段宽(fldwidth)
     - 说明最小字段宽度
@@ -1525,15 +1526,15 @@ rewind函数也可以将一个流设置到文件的起始位置
     - 精度是一个点`.`后跟随一个可选的非负十进制数或者一个星号`*`
 * 参数长度(lenmodifier)
 
-<div align="center"> <img src="../pic/apue-standardio-20.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-20.png"/> </div>
 
 * 转换类型(convtype)
 
-<div align="center"> <img src="../pic/apue-standardio-21.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-21.png"/> </div>
 
 #### 2）格式化输入
 
-<div align="center"> <img src="../pic/apue-standardio-22.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-22.png"/> </div>
 
 `scanf`族用于分析输入字符串，将字符序列转换成指定类型的变量。在格式之后的各参数中包含了变量的地址，用转换结果对这些变量赋值
 
@@ -1549,7 +1550,7 @@ rewind函数也可以将一个流设置到文件的起始位置
 
 ### 4.6 获取流相应的文件描述符
 
-<div align="center"> <img src="../pic/apue-standardio-23.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-23.png"/> </div>
 
 如果要调用dup或fcntl等函数，则需要此函数
 
@@ -1559,7 +1560,7 @@ rewind函数也可以将一个流设置到文件的起始位置
 
 ISO C标准I/O库提供了2个函数以帮助创建临时文件
 
-<div align="center"> <img src="../pic/apue-standardio-24.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-24.png"/> </div>
 
 * `tmpnam` 产生一个与现有文件名不同的一个有效路径名字符串，每次调用都产生一个不同路径名。最多调用`TMP_MAX`次，定义在`<stdio.h>`中
     - `ptr`：指向存放临时文件名的缓冲区的指针
@@ -1573,7 +1574,7 @@ ISO C标准I/O库提供了2个函数以帮助创建临时文件
 
 Single UNIX Specification为处理临时文件定义了另外两个函数：`mkdtemp`和`mkstemp`，它们是XSI的扩展部分：
 
-<div align="center"> <img src="../pic/apue-standardio-25.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-25.png"/> </div>
 
 * `mkdtemp` 创建一个目录，该目录有一个唯一的名字
     - `mkdtemp`函数创建的目录具有权限位集： `S_IRUSR|S_IWUSR|S_IXUSR`。调用进程的文件模式创建屏蔽字可以进一步限制这些权限
@@ -1589,7 +1590,7 @@ Single UNIX Specification为处理临时文件定义了另外两个函数：`mkd
 
 **内存流**：一种标准IO流，虽然它通过 `FILE`指针来访问，但是并没有底层的文件 。所有的IO都是通过在缓冲区和主存之间来回传送字节来完成。虽然它看起来像是文件流，但是更适用于字符串操作
 
-<div align="center"> <img src="../pic/apue-standardio-26.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-26.png"/> </div>
 
 * 参数：
     + `buf`：内存流缓冲区的起始地址
@@ -1597,7 +1598,7 @@ Single UNIX Specification为处理临时文件定义了另外两个函数：`mkd
         + 若`buf`为`NULL`时，则函数负责分配`size`字节的缓冲区，并在流关闭时自动释放分配的缓冲区
     + `type`:控制如何使用流（即打开内存流的方式）
 
-<div align="center"> <img src="../pic/apue-standardio-28.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-28.png"/> </div>
 
 注意：
 
@@ -1611,7 +1612,7 @@ Single UNIX Specification为处理临时文件定义了另外两个函数：`mkd
 
 创建内存流的其他两个函数：
 
-<div align="center"> <img src="../pic/apue-standardio-27.png"/> </div>
+<div align="center"> <img src="./pic/apue-standardio-27.png"/> </div>
 
 * 参数：
     + `bufp`：指向缓冲区地址的指针（用于返回缓冲区地址）
@@ -1640,7 +1641,7 @@ Single UNIX Specification为处理临时文件定义了另外两个函数：`mkd
 
 ## 1.进程的启动与终止
 
-<div align="center"> <img src="../pic/apue-processenv-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-3.png"/> </div>
 
 ### 1.1 main函数
 
@@ -1709,7 +1710,7 @@ exit(main(argc,argv));
 
 下列3个函数正常终止一个程序
 
-<div align="center"> <img src="../pic/apue-processenv-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-1.png"/> </div>
 
 * 参数：
     * `status`：终止状态
@@ -1746,7 +1747,7 @@ return 100;
 
 ### 1.5 登记终止处理程序
 
-<div align="center"> <img src="../pic/apue-processenv-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-2.png"/> </div>
 
 * 参数：
     * `func`：函数指针。它指向的函数的原型是：返回值为`void`，参数为`void`
@@ -1766,7 +1767,7 @@ return 100;
 - 全局变量`environ`包含了该指针数组的地址：`extern char **environ`。我们称`environ`为环境指针，它位于头文件`unistd.h`中
 - 按照惯例，环境字符串由`name=value`这种格式的字符串组成
 
-<div align="center"> <img src="../pic/apue-processenv-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-4.png"/> </div>
 
 > 环境表和环境字符串通常存放在进程存储空间的顶部（栈的上方）
 
@@ -1774,21 +1775,21 @@ return 100;
 
 `getenv`由`ISO C`定义，可以用其获取环境变量值
 
-<div align="center"> <img src="../pic/apue-processenv-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-7.png"/> </div>
 
 下图为一些环境变量和在不同系统上的支持情况：
 
-<div align="center"> <img src="../pic/apue-processenv-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-8.png"/> </div>
 
 ### 2.2 修改环境变量
 
 并不是所有系统都支持修改环境变量：
 
-<div align="center"> <img src="../pic/apue-processenv-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-9.png"/> </div>
 
 中间3个函数的原型如下：
 
-<div align="center"> <img src="../pic/apue-processenv-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-10.png"/> </div>
 
 * `putenv` ：添加环境变量，将其放入环境表中。`str`为`name=value`形式的环境变量。如果已经存在，则先删除原有的定义
 * `setenv` ：修改环境变量。如果环境变量已经存在，有下列2种可能：
@@ -1822,7 +1823,7 @@ return 100;
 
 ## 3.C程序的存储空间布局
 
-<div align="center"> <img src="../pic/apue-processenv-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-5.png"/> </div>
 
 * **正文段**（.text段）：这是由CPU执行的机器指令部分
     * 通常正文段是可以共享的。一个程序可以同时执行`N`次，但是该程序的正文段在内存中只需要有一份而不是`N`份
@@ -1920,7 +1921,7 @@ chenximing@chenximing-MS-7823:~$ ./a.out
 
 画图表示：
 
-<div align="center"> <img src="../pic/apue-processenv-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-13.png"/> </div>
 
 <br>
 
@@ -1955,7 +1956,7 @@ gcc hello1.c
     - 可独立执行，而不需要再向外部要求读取链接库的内容
     - 链接库升级时，需要重新编译生成可执行文件
     
-<div align="center"> <img src="../pic/apue-processenv-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-18.png"/> </div>
 
 * **动态链接库**
     - 扩展名为`.so`，通常命名为`libxxx.so`
@@ -1963,7 +1964,7 @@ gcc hello1.c
     - 不能独立执行，链接库必须存在
     - 链接库升级时，通常不需要重新编译
 
-<div align="center"> <img src="../pic/apue-processenv-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-19.png"/> </div>
 
 为了加速动态链接库的访问效率，一般需要将动态链接库载入内存中，从而避免读取磁盘。加载到高速缓存中的动态链接库所在的目录在文件`/etc/ld.so.conf`中指定，可以使用命令`ldconfig`将该文件中指定目录下的动态库读入缓存中
 
@@ -1987,7 +1988,7 @@ gcc hello1.c
 
 **program break的位置抬升后，程序可以访问新分配区域内的任何内存地址，而此时物理内存页尚未分配。内核会在进程首次试图访问这些虚拟内存地址时自动分配新的物理内存页**
 
-<div align="center"> <img src="../pic/apue-processenv-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-14.png"/> </div>
 
 * **brk**：将**program break**设置为参数指定的位置
     - 虚拟内存以页为单位进行分配，所以`end_data_segment`实际会四舍五入到下一个内存页的边界处
@@ -2005,7 +2006,7 @@ malloc相比brk和sbrk，具有以下优点：
 * 接口简单，允许分配小块内存
 * 允许随意释放内存块，它们被维护于一张空闲内存列表内，在后续分配内存时循环使用
 
-<div align="center"> <img src="../pic/apue-processenv-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-6.png"/> </div>
 
 * `malloc` ：分配指定字节数的存储区。存储区中的初始值不确定
     - malloc返回内存所采用的字节对齐方式，总是适宜于高效访问任何类型的C语言数据结构。在大多数架构上，意味着malloc是基于8字节或16字节边界来分配内存的
@@ -2042,17 +2043,17 @@ malloc相比brk和sbrk，具有以下优点：
 
 当malloc分配内存块时，会额外分配几个字节来存放**记录这块内存大小的整数值**。该整数位于内存块的起始处，而实际返回给调用者的内存地址恰好位于 这一长度记录字节之后：
 
-<div align="center"> <img src="../pic/apue-processenv-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-15.png"/> </div>
 
 **free的实现**
 
 1. free会使用内存块本身的空间来存放链表指针，将自身添加到列表中
 
-<div align="center"> <img src="../pic/apue-processenv-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-16.png"/> </div>
 
 2. 随着对内存不断地释放和重新分配，空闲列表中的空闲内存会和已分配的在用内存混杂在一起
 
-<div align="center"> <img src="../pic/apue-processenv-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-17.png"/> </div>
 
 > C语言允许程序创建指向堆中任意位置的指针，并修改其指向的数据，包括由free和malloc函数维护的内存长度、指向前一空闲块和后一空闲块的指针。如果发生这种缓冲区溢出的情况，会带来严重的后果
 
@@ -2062,7 +2063,7 @@ malloc相比brk和sbrk，具有以下优点：
 
 每个进程都有一组资源限制，其中一些可以用getrlimit和setrlimit函数查询和更改：
 
-<div align="center"> <img src="../pic/apue-processenv-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-processenv-11.png"/> </div>
 
 > 进程的资源限制通常是在系统初始化时由0进程建立的，然后由后续进程继承。每种实现都可以用自己的方法对资源限制做出调整
 
@@ -2081,7 +2082,7 @@ malloc相比brk和sbrk，具有以下优点：
         + `RLIMIT_RSS`：最大驻内存集字节长度
         + `RLIMIT_SIGPENDING`：一个进程可排队的信号的最大数量。这个限制是`sigqueue`函数实施的
         + `RLIMIT_STACK`：栈的最大字节长度
-    <div align="center"> <img src="../pic/apue-processenv-12.png"/> </div>
+    <div align="center"> <img src="./pic/apue-processenv-12.png"/> </div>
     
     - `rlptr`：包含该资源软限制和硬限制的结构体
         + `getrlimit`调用后，这个指针指向的结构中包含了欲获取的相应资源的限制信息
@@ -2215,7 +2216,7 @@ Stack level 0, frame at 0x7ffe5f70daa0:
 
 ### 1.2 进程相关的ID获取函数
 
-<div align="center"> <img src="../pic/apue-processctr-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-1.png"/> </div>
 
 这些函数都没有出错返回
 
@@ -2230,7 +2231,7 @@ Stack level 0, frame at 0x7ffe5f70daa0:
 
 ### 2.1 fork
 
-<div align="center"> <img src="../pic/apue-processctr-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-2.png"/> </div>
 
 * 返回值：
     - **父进程返回子进程ID**：原因是，一个进程的子进程可以有多个，并且没有一个函数使一个进程可以获得其所有子进程的进程ID
@@ -2253,7 +2254,7 @@ Stack level 0, frame at 0x7ffe5f70daa0:
     - **在重定向父进程的标准输出时，子进程的标准输出也会被重定向**
     + `fork`的一个特性是父进程的所有打开文件描述符都被”复制“（就好像执行了dup函数）到子进程中，**父子进程每个相同的打开描述符共享一个文件表项**（故**父子进程共享同一个文件偏移量**
     ）
-    <div align="center"> <img src="../pic/apue-processctr-3.png"/> </div>
+    <div align="center"> <img src="./pic/apue-processctr-3.png"/> </div>
 
 一个进程fork了一个子进程，然后等待子进程终止。假定，作为普通处理的一部分，父进程和子进程都向标准输出进行写操作。如果父进程的标准输出已重定向，那么子进程写到该标准输出时，它将更新与父进程共享的该文件的偏移量
 
@@ -2350,7 +2351,7 @@ pid=30595,glob=7,val=89
 
 父进程能通过`wait`、`waitpid`获取子进程的终止状态
 
-<div align="center"> <img src="../pic/apue-processctr-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-4.png"/> </div>
 
 * 参数
     - `statloc`：如果关心终止状态就传入一个int变量的地址，终止状态将存于其中；不关心终止状态可以设为NULL。该整形状态字是由实现定义的：
@@ -2358,7 +2359,7 @@ pid=30595,glob=7,val=89
         + 某些位指示信号编号（异常返回）
         + 有一位指示是否产生了core文件
     可以使用POSIX.1规定，终止状态用定义在`<sys/wait.h>`中的宏来查看，下图4个互斥的宏可用来取得进程终止的原因。基于这4个宏中哪一个值为真，就可选用其它宏来取得退出状态，信号编号等：
-    <div align="center"> <img src="../pic/apue-processctr-5.png"/> </div>
+    <div align="center"> <img src="./pic/apue-processctr-5.png"/> </div>
 
     - `pid`：`waitpid`可以指定等待哪个子进程终止，`wait`无法指定（`wait`和`waitpid`的区别）
         + `-1`：等待任一子进程，这种情况下与`wait`等效
@@ -2366,7 +2367,7 @@ pid=30595,glob=7,val=89
         + `0`：等待组ID等于调用进程组ID的任一子进程
         + `<-1`：等待组ID等于pid绝对值的任一子进程
     - `options`：`waitpid`可以通过该参数时调用不阻塞（`wait`和`waitpid`的区别）。可以为0，也可以是下图按位或运算的结果：
-    <div align="center"> <img src="../pic/apue-processctr-6.png"/> </div>
+    <div align="center"> <img src="./pic/apue-processctr-6.png"/> </div>
 
 父进程调用`wait`、`waitpid`时可能出现几种情况：
 
@@ -2431,7 +2432,7 @@ exit(0);
 
 有7种不同的`exec`函数可以供使用，它们被统称称作`exec`函数：
 
-<div align="center"> <img src="../pic/apue-processctr-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-7.png"/> </div>
 
 * **新程序指定方式**
     + **前四个**函数取**路径名**作为参数
@@ -2446,11 +2447,11 @@ exit(0);
     - **函数名中的`e`**：可以传递一个指向环境字符串指针数组的指针，数组最后一个元素必须是空指针
     - **否则**：使用进程的`environ`变量为新程序复制现有环境
 
-<div align="center"> <img src="../pic/apue-processctr-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-8.png"/> </div>
 
 7个函数之间的关系如下图：
 
-<div align="center"> <img src="../pic/apue-processctr-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-9.png"/> </div>
 
 执行`exec`后，进程ID没有改变。新程序从调用进程继承了下列属性：
 
@@ -2489,11 +2490,11 @@ UNIX中，特权及访问控制，是基于用户ID和组ID的
 * 当程序需要增加特权，或需要访问当前并不允许访问的资源时，需要更换自己的用户ID或组ID，使得新ID具有合适的特权或访问权限
 * 当程序需要降低特权，或阻止对某些资源的访问时，也需要更换用户ID或组ID，新ID不具有相应特权或访问这些资源的能力
 
-<div align="center"> <img src="../pic/apue-processctr-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-13.png"/> </div>
 
 ### 6.1 setuid与setgid
 
-<div align="center"> <img src="../pic/apue-processctr-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-10.png"/> </div>
 
 * `setuid`：设置`实际用户ID`和`有效用户ID`
 * `setgid`：设置`实际组ID`和`有效组ID`
@@ -2516,7 +2517,7 @@ UNIX中，特权及访问控制，是基于用户ID和组ID的
 
 下图总结了更改这3个`用户ID`的不同方法：
 
-<div align="center"> <img src="../pic/apue-processctr-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-11.png"/> </div>
 
 目前可以通过`getuid`获取进程的当前`实际用户ID`，可以通过`geteuid`获取进程的当前`有效用户ID`，但是没有函数获取进程当前的`保存的设置用户ID`
 
@@ -2524,7 +2525,7 @@ UNIX中，特权及访问控制，是基于用户ID和组ID的
 
 历史上，BSD支持setreuid函数，其功能是交换`实际用户ID`和`有效用户ID`的值
 
-<div align="center"> <img src="../pic/apue-processctr-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-14.png"/> </div>
 
 若其中任一参数为-1，则表示相应的ID应当保持不变
 
@@ -2534,7 +2535,7 @@ UNIX中，特权及访问控制，是基于用户ID和组ID的
 
 POSIX.1提供下列2个函数，类似于`setuid`和`setgid`，但是他们只更改`有效ID`，不更改`实际ID`：
 
-<div align="center"> <img src="../pic/apue-processctr-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-12.png"/> </div>
 
 * 一个**非特权用户**可将其`有效用户ID`设置为其`实际用户ID`或其`保存的设置用户ID`
 * 一个**特权用户**则可将`有效用户ID`设置为`uid`
@@ -2547,7 +2548,7 @@ POSIX.1提供下列2个函数，类似于`setuid`和`setgid`，但是他们只�
 
 ISO C定义了system函数，但是其操作对系统的依赖性很强。POSIX.1包括了system接口，它扩展了ISO C定义，描述了system在POSIX.1环境中的运行行为
 
-<div align="center"> <img src="../pic/apue-processctr-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-15.png"/> </div>
 
 * 参数：
     * `cmdstring`：命令字符串（在`shell`中执行），如 `"ps -aux"`（如果`cmdstring`为空指针，则如果`system`返回 0 表示该操作系统不支持`system`函数；否则支持）
@@ -2568,7 +2569,7 @@ ISO C定义了system函数，但是其操作对系统的依赖性很强。POSIX.
 
 ## 8.用户标识
 
-<div align="center"> <img src="../pic/apue-processctr-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-16.png"/> </div>
 
 * 返回值：
     * 成功：返回指向登录名字符串的指针
@@ -2587,7 +2588,7 @@ ISO C定义了system函数，但是其操作对系统的依赖性很强。POSIX.
 
 进程可以通过`nice`函数**获取或更改**它的`nice`值，进程只能影响自己的`nice`值，不能影响任何其他进程的`nice`值：
 
-<div align="center"> <img src="../pic/apue-processctr-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-17.png"/> </div>
 
 * 参数
     * `incr`：`nice`值的增量。如果太小或太大，系统会修改到边界值（为0时，`nice`值不变，因此可以用以获取当前`nice`值）
@@ -2596,7 +2597,7 @@ ISO C定义了system函数，但是其操作对系统的依赖性很强。POSIX.
 
 `getpriority`函数可以像`nice`函数那样用于获取进程的`nice`值，但是它还可以获取一组相关进程的`nice`值：
 
-<div align="center"> <img src="../pic/apue-processctr-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-18.png"/> </div>
 
 * 参数：
     * `which`：控制`who`参数是如何解释的。可以取三个值之一：
@@ -2625,7 +2626,7 @@ ISO C定义了system函数，但是其操作对系统的依赖性很强。POSIX.
 
 任一进程可调用`times`函数获得它自己以及已终止子进程的**墙上时钟时间**、**用户CPU时间**、**系统CPU时间**
 
-<div align="center"> <img src="../pic/apue-processctr-20.png"/> </div>
+<div align="center"> <img src="./pic/apue-processctr-20.png"/> </div>
 
 该函数填写由`buf`指向的`tms`结构：
 
@@ -2682,7 +2683,7 @@ struct tms{
 
 该函数用于创建一个POSIX线程。**当一个程序由exec启动执行时，称为“初始线程”或“主线程”的单个线程就创建了。其余线程则由pthread_create函数创建**
 
-<div align="center"> <img src="../pic/unp-thread-1.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-1.png"/> </div>
 
 * **tid**：线程ID，数据类型为pthread_t，往往是unsigned int，如果线程成功创建，其ID就通过tid指针返回
 * **attr**：线程属性，包括：优先级、初始栈大小、是否应该成为一个守护线程等。设置为空指针时表示采用默认设置
@@ -2699,7 +2700,7 @@ struct tms{
 
 pthread_join类似于进程中的waitpid，用于等待一个给定线程的终止
 
-<div align="center"> <img src="../pic/unp-thread-2.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-2.png"/> </div>
 
 * **tid**：等待终止的线程ID。和进程不同的是，无法等待任意线程，所以不能通过指定ID参数为-1来企图等待任意线程终止
 * **status**：如果该指针非空，来自所等待线程的返回值（一个指向某个对象的指针）将存入由status指向的位置
@@ -2762,13 +2763,13 @@ thread 2 exit code 2
 
 线程可以使用pthread_self获取自身的线程ID，类似于进程中的getpid
 
-<div align="center"> <img src="../pic/unp-thread-3.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-3.png"/> </div>
 
 新线程不应该根据主线程调用`pthread_create`函数时传入的`tid`参数来获取自身ID，而是应该调用pthread_self，因为新线程可能在主线程调用`pthread_create`返回之前运行，如果读取`tid`，看到的是未经初始化的内容
 
 ### 4）pthread_detach函数
 
-<div align="center"> <img src="../pic/unp-thread-4.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-4.png"/> </div>
 
 该函数把指定的线程转变为**脱离状态**，通常由想让自己脱离的线程调用：```pthread_detach(pthread_self());```
 
@@ -2783,7 +2784,7 @@ thread 2 exit code 2
 
 线程终止的**一个方法**：
 
-<div align="center"> <img src="../pic/unp-thread-5.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-5.png"/> </div>
 
 * **status**：指定了线程的返回值。不能指向一个局部于调用线程的对象，因为线程终止时这样的对象也消失
 
@@ -2875,7 +2876,7 @@ parent:
 
 ### 6）pthread_equal函数
 
-<div align="center"> <img src="../pic/unp-thread-14.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-14.png"/> </div>
 
 线程ID是用`pthread_t`数据类型来表示的，实现的时候可以用一个结构来表示该数据类型，所以可移植的操作系统实现不能把它作为整数处理。因此必须使用一个函数来对两个线程ID进程比较
 
@@ -2883,7 +2884,7 @@ parent:
 
 ### 7）pthread_cancel函数
 
-<div align="center"> <img src="../pic/unp-thread-15.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-15.png"/> </div>
 
 该函数可以被某一线程调用，用来请求取消同一进程中的其它线程
 
@@ -2895,7 +2896,7 @@ parent:
 
 以下函数被线程调用时，可以添加或清除清理函数：
 
-<div align="center"> <img src="../pic/unp-thread-16.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-16.png"/> </div>
 
 > 这2个函数可以被实现为宏，通常pthread_cleanup_push会带有一个`{`，而pthread_cleanup_pop会带有1个'}'。因此，在使用时，2个函数应该配对出现
 
@@ -3002,7 +3003,7 @@ int main()
 * **如果某个互斥锁变量是静态分配的，必须把它初始化为常值PTHREAD_MUTEX_INITIALIZER**
 * **如果在共享内存区中分配一个互斥锁，必须通过调用pthread_mutex_init函数在运行时初始化，此时在释放内存前需要调用pthread_mutex_destroy**
 
-<div align="center"> <img src="../pic/apue-thread-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-1.png"/> </div>
 
 * `attr`：互斥锁的属性。为NULL时表示使用默认的属性来初始化
 
@@ -3010,7 +3011,7 @@ int main()
 
 ### 2）互斥锁的加锁与解锁
 
-<div align="center"> <img src="../pic/apue-thread-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-2.png"/> </div>
 
 * **mptr**
     - **pthread_mutex_lock**锁住mptr指向的互斥锁，如果已经上锁，调用线程将阻塞
@@ -3028,7 +3029,7 @@ int main()
 
 ### 3）互斥锁的定时加锁
 
-<div align="center"> <img src="../pic/apue-thread-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-3.png"/> </div>
 
 该函数试图对一个互斥锁进行加锁，如果互斥锁已经上锁，那么线程会阻塞到参数`tsptr`指定的时刻（这个时间是一个绝对时间，即某个时刻，而不是一个等待时间段）。如果仍为获得互斥锁，那么返回`ETIMEDOUT`
 
@@ -3052,7 +3053,7 @@ int main()
 
 读写锁在使用之前必须初始化，释放它们底层的内存之前必须销毁：
 
-<div align="center"> <img src="../pic/apue-thread-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-4.png"/> </div>
 
 * `attr`：锁的初始化属性，设为NULL时使用默认属性
 
@@ -3060,17 +3061,17 @@ Single UNIX Specification在XSI扩张中定义了**PTHREAD_RWLOCK_INITIALIZER**�
 
 ### 2）读写锁的加锁与解锁
 
-<div align="center"> <img src="../pic/apue-thread-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-5.png"/> </div>
 
 Single UNIX Specification还提供了下列版本：
 
-<div align="center"> <img src="../pic/apue-thread-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-6.png"/> </div>
 
 ### 3）读写锁的定时加锁
 
 与互斥锁一样，Single UNIX Specification提供了带有超时的读写锁加锁函数：
 
-<div align="center"> <img src="../pic/apue-thread-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-7.png"/> </div>
 
 该函数试图对一个读写锁进行加锁，如果读写锁已经上锁，那么线程会阻塞到参数`tsptr`指定的时刻（这个时间是一个绝对时间，即某个时刻，而不是一个等待时间段）。如果仍为获得读写锁，那么返回`ETIMEDOUT`
 
@@ -3082,7 +3083,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 1）条件变量的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-thread-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-8.png"/> </div>
 
 * `attr`：条件变量的初始化属性，设为NULL时使用默认属性
 
@@ -3090,7 +3091,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 2）等待某个条件变量
 
-<div align="center"> <img src="../pic/apue-thread-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-9.png"/> </div>
 
 * **pthread_cond_wait**函数等待`cond`指向的条件变量，投入睡眠之前会释放`mutex`指向的互斥锁，唤醒后会重新获得`mutex`指向的互斥锁
 * **pthread_cond_timewait**在给定的时间内等待条件发生，超时会重新获取`mutex`指向的互斥锁并返回一个错误码（这个时间仍然是一个绝对时间）
@@ -3101,7 +3102,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 3）通知条件已经满足
 
-<div align="center"> <img src="../pic/apue-thread-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-11.png"/> </div>
 
 * **pthread_cond_signal**：至少能唤醒一个等待该条件的线程
 * **pthread_cond_broadcast**：能唤醒所有等待该条件的线程
@@ -3114,7 +3115,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 1）自旋锁的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-thread-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-10.png"/> </div>
 
 * `pshared`：进程共享属性，表明自旋锁是如何获取的
     - 如果设为`PTHREAD_PROCESS_SHARED`，则自旋锁能被可以访问锁底层内存的线程所获取，即便那些线程属于不同的进程
@@ -3122,7 +3123,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 2）自旋锁的加锁与解锁
 
-<div align="center"> <img src="../pic/apue-thread-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-12.png"/> </div>
 
 * **pthread_spin_lock**：在获取锁之前一直自旋
 * **pthread_spin_trylock**：如果不能获取锁，就立即返回`EBUSY`错误
@@ -3138,7 +3139,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 1）屏障的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-thread-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-13.png"/> </div>
 
 * `count`：在允许所有线程继续运行之前，必须到达屏障的线程数目
     - 假设主线程希望开启`n`个线程进行排序，每个线程排序数组的一部分，所有`n`个线程排好序后主线程进行归并，那么`count`应该为`n+1`
@@ -3146,7 +3147,7 @@ Single UNIX Specification还提供了下列版本：
 
 ### 2）增加到达屏障点的线程
 
-<div align="center"> <img src="../pic/apue-thread-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-thread-14.png"/> </div>
 
 该函数用以表明，线程已完成工作，准备等待所有其他线程赶上来
 
@@ -3166,11 +3167,11 @@ Single UNIX Specification还提供了下列版本：
 
 Single UNIX Specification定义了与线程操作有关的一些限制，这些限制可以通过sysconf函数进程查询：
 
-<div align="center"> <img src="../pic/apue-threadctr-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-1.png"/> </div>
 
 下图为apue描述的4种操作系统实现中的限制值：
 
-<div align="center"> <img src="../pic/apue-threadctr-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-2.png"/> </div>
 
 > 这些限制的使用是为了增强应用程序在不同的操作系统实现之间的可移植性
 
@@ -3196,7 +3197,7 @@ printf("%ld\n",sysconf(_SC_THREAD_THREADS_MAX));    //-1（正常值，因为没
 
 下图为POSIX.1定义的线程属性在apue描述的4种操作系统实现中的支持情况：
 
-<div align="center"> <img src="../pic/apue-threadctr-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-4.png"/> </div>
 
 > POSIX.1还为线程执行调度选项定义了额外的属性，用以支持实时应用，但这里不打算讨论这些属性
 
@@ -3231,7 +3232,7 @@ pthread_attr_destroy(&attr);
 
 ### 1）线程属性的初始化和销毁
 
-<div align="center"> <img src="../pic/apue-threadctr-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-3.png"/> </div>
 
 如果`pthread_attr_init`的实现对属性对象的内存空间是动态分配的，那么`pthread_attr_destroy`会释放该内存空间。除此之外，`pthread_attr_destroy`还会用无效的值初始化属性对象，因此，如果该属性对象被误用，将会导致`pthread_create`函数返回错误码
 
@@ -3239,7 +3240,7 @@ pthread_attr_destroy(&attr);
 
 ### 2）分离属性的获取与设置
 
-<div align="center"> <img src="../pic/apue-threadctr-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-5.png"/> </div>
 
 * 函数`pthread_detach`是让已经存在的某个线程变为分离状态
 * 如果想让线程从创建开始就处于分离，可以设置分离属性，然后使用该属性调用`pthread_create`
@@ -3252,13 +3253,13 @@ pthread_attr_destroy(&attr);
 
 如果线程栈的虚地址空间都用完了，那么可以使用malloc或mmap来为可替代的栈分配空间，并用下列函数设置或者获取线程栈的最低内存地址：
 
-<div align="center"> <img src="../pic/apue-threadctr-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-6.png"/> </div>
 
 * `stackaddr`：线程栈的最低内存地址（不一定是栈的开始地址。对于一个给定的处理器结构来说，如果栈是从高地址向低地址方向增长的，那么stackaddr线程属性将是栈的结尾位置，而不是开始位置）
 
 ### 4）栈大小属性的获取与设置
 
-<div align="center"> <img src="../pic/apue-threadctr-7.png"/> </div>
+<div align="center"> <img src=" ./pic/apue-threadctr-7.png"/> </div>
 
 * `stacksize`：栈大小，不能小于`PTHREAD_STACK_MIN`
 
@@ -3266,7 +3267,7 @@ pthread_attr_destroy(&attr);
 
 ### 5）境界缓存大小的获取与设置
 
-<div align="center"> <img src="../pic/apue-threadctr-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-8.png"/> </div>        
 
 * `guardsize`：控制着线程栈末尾之后用于避免栈溢出的扩展内存的大小
     - `默认值`：由具体实现决定，常用值是系统页大小
@@ -3286,7 +3287,7 @@ pthread_attr_destroy(&attr);
 
 ### 1）可取消状态属性
 
-<div align="center"> <img src="../pic/apue-threadctr-23.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-23.png"/> </div>
 
 * `state`：新的可取消状态
 * `oldstate`：旧的可取消状态
@@ -3295,7 +3296,7 @@ pthread_attr_destroy(&attr);
 
 `pthread_cancel`调用并不等待线程终止。**默认情况下，线程在取消请求发出后还是继续运行，直到线程到达某个取消点**。取消点是线程检查它是否被取消的一个位置，POSIX.1保证线程调用下列函数时，取消点都会出现：
 
-<div align="center"> <img src="../pic/apue-threadctr-24.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-24.png"/> </div>
 
 可取消状态可以是下面的值：
 
@@ -3304,7 +3305,7 @@ pthread_attr_destroy(&attr);
 
 如果线程长时间不会调用前面所述函数进入一个取消点，可以通过**下列函数添加取消点**：
 
-<div align="center"> <img src="../pic/apue-threadctr-25.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-25.png"/> </div>
 
 下列2个条件满足时，该函数会使线程被取消：
 
@@ -3315,7 +3316,7 @@ pthread_attr_destroy(&attr);
 
 ### 2）可取消类型属性
 
-<div align="center"> <img src="../pic/apue-threadctr-26.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-26.png"/> </div>
 
 * `type`：新的可取消类型
 * `oldtype`：旧的可取消类型
@@ -3359,7 +3360,7 @@ pthread_attr_destroy(&attr);
     - 使用**PTHREAD_MUTEX_INITIALIZER**常量
     - 调用`pthread_mutexattr_init`函数
 
-<div align="center"> <img src="../pic/apue-threadctr-22.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-22.png"/> </div>
 
 ### 2）进程共享属性的获取和设置
 
@@ -3368,7 +3369,7 @@ pthread_attr_destroy(&attr);
 1）检查系统中是否定义了`_POSIX_THREAD_PROCESS_SHARED`符号判断这个平台是否支持进程共享这个属性；
 2）可以在运行时把`_SC_THREAD_PROCESS_SHARED`参数传给`sysconf`函数进行检查）
 
-<div align="center"> <img src="../pic/apue-threadctr-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-9.png"/> </div>
 
 * `pshared`
     - `PTHREAD_PROCESS_PRIVATE`：默认的行为。进程中的多个线程可以访问同一个同步对象。该值允许pthread线程库提供更有效的互斥锁实现。在多个进程共享多个互斥锁的情况下，pthread线程库可以限制开销较大的互斥锁实现
@@ -3379,7 +3380,7 @@ pthread_attr_destroy(&attr);
 
 互斥锁的健壮属性与在**多个进程间**共享的互斥锁有关。意味着，当持有互斥锁的进程终止时，需要解决互斥锁状态恢复的问题。这种情况发生时，互斥锁处于锁定状态，恢复起来很困难。其它阻塞在这个锁的进程将会一直阻塞下去
 
-<div align="center"> <img src="../pic/apue-threadctr-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-10.png"/> </div>
 
 * `robust`
     - `PTHREAD_MUTEX_STALLED`：意味着持有互斥锁的进程终止时不需要采取特别的动作。这种情况下，使用互斥锁后的行为是未定义的，等待该互斥锁解锁的应用程序会被有效地”拖住“
@@ -3387,7 +3388,7 @@ pthread_attr_destroy(&attr);
 
 如果应用状态无法恢复，在线程对互斥锁解锁后，该互斥锁将处于永久不可用状态。为了避免这样的问题，线程可以通过调用`pthread_mutex_consistent`函数，指明该互斥锁相关的状态在互斥锁解锁以前是一致的
 
-<div align="center"> <img src="../pic/apue-threadctr-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-11.png"/> </div>
 
 如果线程没有先调用`pthread_mutex_consistent`就对互斥锁进行了解锁，那么其它试图获取该互斥锁的阻塞线程就会得到错误码`ENOTRECOVERABLE`。如果发生这种情况，互斥锁将不再可用。线程通过提前调用`pthread_mutex_consistent`，就能让互斥锁正常工作，这样它就可以持续被使用
 
@@ -3402,7 +3403,7 @@ pthread_attr_destroy(&attr);
 
 下图为不同的类型属性和行为：
 
-<div align="center"> <img src="../pic/apue-threadctr-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-12.png"/> </div>
 
 不占用时解锁：一个线程对被另一个线程加锁的互斥锁进行解锁
 
@@ -3416,13 +3417,13 @@ pthread_attr_destroy(&attr);
 
 ### 1）读写锁属性的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-threadctr-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-14.png"/> </div>
 
 ### 2）进程共享属性的获取与设置
 
 进程共享属性是读写锁的唯一属性，可以通过下列函数获取与设置
 
-<div align="center"> <img src="../pic/apue-threadctr-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-15.png"/> </div>
 
 > 虽然POSIX只定义了一个读写锁属性，但不同平台的实现可以自由地定义额外的、非标准的属性
 
@@ -3437,19 +3438,19 @@ Single UNIX Specification目前定义了条件变量的2个属性：
 
 ### 1）条件变量属性的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-threadctr-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-16.png"/> </div>
 
 ### 2）进程共享属性的获取与设置
 
 与其他的同步属性一样，条件变量支持进程共享属性。它控制着条件变量是可以被单进程的多个线程使用，还是可以被多进程的线程使用
 
-<div align="center"> <img src="../pic/apue-threadctr-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-17.png"/> </div>
 
 ### 3）时钟属性的获取与设置
 
 时钟属性控制计算`pthread_cond_timedwait`函数的超时参数`tsptr`采用的是哪个时钟
 
-<div align="center"> <img src="../pic/apue-threadctr-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-18.png"/> </div>
 
 * **pthread_condattr_getclock**：获取可被用于`pthread_cond_timewait`函数的时钟ID
 * **pthread_condattr_setclock**：对时钟ID进行修改
@@ -3462,13 +3463,13 @@ Single UNIX Specification目前定义了条件变量的2个属性：
 
 ### 1）屏障属性的初始化与销毁
 
-<div align="center"> <img src="../pic/apue-threadctr-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-19.png"/> </div>
 
 ### 2）进程共享属性的获取与设置
 
 目前定义的屏障属性只有进程共享属性，它控制着屏障是可以被多进程的线程使用，还是只能被初始化屏障的进程内的多线程使用
 
-<div align="center"> <img src="../pic/apue-threadctr-20.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-20.png"/> </div>
 
 <br>
 
@@ -3483,13 +3484,13 @@ Single UNIX Specification目前定义了条件变量的2个属性：
 
 **每个系统支持有限数量的线程特定数据元素，POSIX要求这个限制不小于128(每个进程)**，**系统**为**每个进程**维护一个称之为Key结构的数组，如下图：
 
-<div align="center"> <img src="../pic/unp-thread-7.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-7.png"/> </div>
 
  * **标志**：指示这个数组元素是否正在使用（所有标志初始化为”不在使用“）
 
 除了**进程范围**的Key结构数组外，**系统**还在**进程内**维护关于每个线程的多条信息，记录在Pthread结构（由系统维护）中：
 
-<div align="center"> <img src="../pic/unp-thread-8.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-8.png"/> </div>
 
 pKey数组的所有元素都被初始化为空指针。这128个指针是和进程内的128个可能的索引（称为”键“）逐一关联的值
 
@@ -3504,7 +3505,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 1）pthread_once和pthread_key_create函数
 
-<div align="center"> <img src="../pic/unp-thread-9.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-9.png"/> </div>
 
 **pthread_key_create函数**：
 
@@ -3531,14 +3532,14 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 ### 2）pthread_getspecific和pthread_setspecific函数
 
-<div align="center"> <img src="../pic/unp-thread-10.png"/> </div>
+<div align="center"> <img src="./pic/unp-thread-10.png"/> </div>
 
 * pthread_getspecific函数返回对应指定键的指针
 * pthread_setspecific函数在Pthread结构中把对应指定键的指针设置为指向分配的内存
 
 ### 3）pthread_key_delete函数
 
-<div align="center"> <img src="../pic/apue-threadctr-21.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-21.png"/> </div>
 
 该函数用来取消键与线程特定数据值之间的关联。它并不会激活与键关联的析构函数。要释放任何与键关联的线程特定数据值的内存，需要在应用程序中采取额外的步骤
 
@@ -3557,7 +3558,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 `sigprocmask`的行为在多线程的进程中没有定义，线程必须使用`pthread_sigmask`：
 
-<div align="center"> <img src="../pic/apue-threadctr-27.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-27.png"/> </div>
 
 * `how`：set与线程信号屏蔽字的作用方式
     - `SIG_BLOCK`：把信号集`set`添加到线程信号屏蔽字中
@@ -3572,7 +3573,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 线程调用下列函数**等待一个或多个信号出现**
 
-<div align="center"> <img src="../pic/apue-threadctr-28.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-28.png"/> </div>
 
 * `set`：等待的信号集（**如果信号集中的某个信号在函数调用时处于等待挂起状态，那么函数将无阻塞地返回**）
 * `signop`：指向的整数包含发送信号的数量
@@ -3586,7 +3587,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 要**把信号发送给进程**，可以调用`kill`。要**把信号发送给线程**，可以调用`pthread_kill`：
 
-<div align="center"> <img src="../pic/apue-threadctr-29.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-29.png"/> </div>
 
 可以传一个`0`值的`signo`来检查线程是否存在。如果信号的默认处理动作是终止该进程，那么把信号传递给某个线程仍然会杀死整个进程
 
@@ -3607,7 +3608,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 **要清除锁状态**，可以调用`pthread_atfork`**建立fork处理程序**：
 
-<div align="center"> <img src="../pic/apue-threadctr-30.png"/> </div>
+<div align="center"> <img src="./pic/apue-threadctr-30.png"/> </div>
 
 **该函数可以安装清除锁的函数，最多3个**：
 
@@ -3643,7 +3644,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 下图为UNIX下5种I/O模型的比较
 
-<div align="center"> <img src="../pic/apue-advio-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-6.png"/> </div>
 
 * **同步I/O**：I/O操作过程中会导致请求进程阻塞，直到I/O操作完成
     - **1）阻塞式I/O**：进程会在整个调用开始到结束一直阻塞
@@ -3661,7 +3662,7 @@ pKey数组的所有元素都被初始化为空指针。这128个指针是和进�
 
 POSIX.1通过[fcntl函数](#27-fcntl函数)提供记录锁功能
 
-<div align="center"> <img src="../pic/apue-advio-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-1.png"/> </div>
 
 此时`cmd`参数是下面3个：
 
@@ -3703,7 +3704,7 @@ struct flock{
 - **任意多个进程可以在一个给定的字节上有一把共享性读锁。如果在一个给定字节上已经有了一把或者多把读锁，则不能在该字节上添加写锁**（当进程A在文件的某个区间设置了一把读锁时，如果进程B试图在同一个区间设置一把写锁，则进程B会被阻塞。现在如果有另外进程C试图在同一个区间设置一把读锁，则进程C能不能顺利加读锁？POSIX.1并没有说明这一情况。如果进程C允许添加读锁，则很可能后续大量的读锁被添加从而导致进程B的写锁得不到设置从而进程B被饿死）
 - **在一个给定字节上只能有一个进程有一把独占性写锁。如果在一个给定字节上已经有了一把写锁，则不能在该字节上添加任何读锁或者写锁**
 
-<div align="center"> <img src="../pic/apue-advio-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-1.png"/> </div>
 
 注意：该规则适用于不同进程提出的锁请求，不适合单个进程提出的多个锁请求。如果某个进程对一个文件区间已经有了一把锁，后来该进程又企图在同一个文件区间再加一把锁，则新锁将会替换旧锁
 
@@ -3720,15 +3721,15 @@ struct flock{
 
 第100\~199字节是加锁区：
 
-<div align="center"> <img src="../pic/apue-advio-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-3.png"/> </div>
 
 解锁第150字节，内核将维持2把锁：
 
-<div align="center"> <img src="../pic/apue-advio-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-4.png"/> </div>
 
 如果又对第150字节加锁，那么系统会把3个相邻的加锁区合并成一个：
 
-<div align="center"> <img src="../pic/apue-advio-3.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-3.png"/> </div>
 
 ### 5）记录锁的隐含继承和释放
 
@@ -3761,7 +3762,7 @@ struct flock{
 
 如果一个进程试图`read/write`一个强制性锁起作用的文件，但是将要读/写的部分又由其他进程上了锁，则结果取决于三方面的因素：操作类型`read/write`，其他进程在该区域上持有的记录锁的类型（读锁/写锁），`read/write`文件描述符是阻塞的还是非阻塞的
 
-<div align="center"> <img src="../pic/apue-advio-5.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-5.png"/> </div>
 
 除了`read/write`函数外，`open`函数也会受到另一个进程持有的强制性锁的影响：
 
@@ -3823,7 +3824,7 @@ struct aiocb{
 
 在进行异步I/O前需要先初始化AIO控制块。调用`aio_read`函数来进行异步读操作，或调用`aio_write`函数来进行异步写操作
 
-<div align="center"> <img src="../pic/apue-advio-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-7.png"/> </div>
 
 当这些函数返回成功时，异步I/O请求就已经被操作系统放入等待处理的队列中了。这些返回值与实际I/O操作的结果没有任何关系。
 
@@ -3831,7 +3832,7 @@ struct aiocb{
 
 如果想强制所有等待中的异步操作不等待而写入持久化的存储（如硬盘）中，可以设立一个AIO控制块并调用`aio_fsync`函数：
 
-<div align="center"> <img src="../pic/apue-advio-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-8.png"/> </div>
 
 * 参数：
     * `op`：指定模式：
@@ -3845,7 +3846,7 @@ AIO控制块中的`aio_fildes`字段指定了其异步写操作不等待而写�
 
 ### 4.3 获取异步I/O的状态
 
-<div align="center"> <img src="../pic/apue-advio-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-9.png"/> </div>
 
 * 返回值：
     * 成功：返回 0 。表示异步操作完成，此时需要调用`aio_return`函数获取操作返回值
@@ -3855,7 +3856,7 @@ AIO控制块中的`aio_fildes`字段指定了其异步写操作不等待而写�
 
 ### 4.4 获取异步I/O返回值
 
-<div align="center"> <img src="../pic/apue-advio-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-10.png"/> </div>
 
 * 返回值：
     * 失败： 返回 -1。对`aio_return`的调用失败，此时`errno`会告诉我们发生了什么
@@ -3869,7 +3870,7 @@ AIO控制块中的`aio_fildes`字段指定了其异步写操作不等待而写�
 
 如果在完成了所有事务时，还有异步操作未完成，可以调用调用该函数来阻塞进程，直到操作完成：
 
-<div align="center"> <img src="../pic/apue-advio-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-11.png"/> </div>
 
 * 参数：
     * `list`：AIO控制块指针的数组。每个元素指向了要等待完成的异步操作
@@ -3890,7 +3891,7 @@ AIO控制块中的`aio_fildes`字段指定了其异步写操作不等待而写�
 
 当我们不想再完成等待中的异步I/O操作时，可以尝试使用`aio_cancel`函数来取消它们
 
-<div align="center"> <img src="../pic/apue-advio-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-12.png"/> </div>
 
 * 参数：
     * `fd`：指定了那个未完成异步`IO`操作的文件描述符
@@ -3911,12 +3912,13 @@ AIO控制块中的`aio_fildes`字段指定了其异步写操作不等待而写�
 
 AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
-<div align="center"> <img src="../pic/apue-advio-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-14.png"/> </div>
 
 * 参数：
     * `mode`：决定了`IO`是否同步的。其值可以为：
         * `LIO_WAIT`：`lio_listio`函数将在所有的由列表指定的`IO`操作完成后返回。此时`sigev`参数被忽略。这是同步操作
         * `LIO_NOWAIT`：`lio_listio`函数将在所有的由列表指定的`IO`操作请求入队立即返回（不等到完成）。进程将在所有`IO`操作完成后，根据`sigev`参数指定的方式，被异步的通知（如果不想被通知，则将`sigev`设置为`NULL`）
+
             > 每个`AIO`控制块本身也可能启动了在各自操作完成时的异步通知。`sigev`指定的异步通知是额外加的，并且只会在所有的`IO`操作完成后发送
     * `list`：`AIO`控制块指针的数组，该数组指定了要允许的`IO`操作。如果数组包含空指针，则跳过这些空指针
     * `nent`：数组的长度
@@ -3961,7 +3963,7 @@ AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
 内核将一个给定的文件映射到一个存储区域中是由`mmap`实现的：
 
-<div align="center"> <img src="../pic/apue-advio-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-15.png"/> </div>
 
 * 参数：
     * `addr`：用于指定映射存储区的起始地址。如果为 0，则表示由系统选择该映射区的起始地址
@@ -3988,7 +3990,7 @@ AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
 下图是存储映射文件的基本情况。其中“起始地址”是`mmap`的返回值
 
-<div align="center"> <img src="../pic/apue-advio-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-16.png"/> </div>
 
 假设文件长度为 12 字节，系统页长为 512 字节，则系统通常会提供 512 字节的映射区，其中后 500字节被设置为0 。可以修改后面的这 500 字节，但是任何变动都不会在文件中反映出来。因此，不能用`mmap`将数据添加到文件中（可以先加长该文件，使得能够将后面500字节的改动反映到文件中去）
 
@@ -3996,13 +3998,14 @@ AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
 - `SIGSEGV`：通常用于指示进程试图访问对它不可用的存储区。如果映射存储区被`mmap`指定成了只读的，则进程试图写这个映射存储区时，也产生此信号
 - `SIGBUS`：如果映射区的某个部分在访问时不存在，则产生`SIGBUS`信号
+
     > 如：用文件长度映射了一个文件，但在引用该映射区之前，另一个进程已将该文件截断，此时如果进程试图访问被截断部分对应的映射区，则接收到`SIGBUS`信号
 
 **子进程能够通过`fork`继承存储映射区（因为子进程复制了父进程地址空间，而存储映射区是该地址空间的组成部分）。但是一旦子进程调用了`exec`，则新程序不再拥有存储映射区了**
 
 ### 6.2 mprotect修改映射区权限
 
-<div align="center"> <img src="../pic/apue-advio-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-17.png"/> </div>
 
 * 参数：
     * `addr`：存储映射区的地址，必须是系统页长的整数倍
@@ -4020,7 +4023,7 @@ AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
 如果共享映射中的页已修改，则可以调用`msync`函数将该页冲洗到底层文件中。它类似于`fsync`，但作用于存储映射区：
 
-<div align="center"> <img src="../pic/apue-advio-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-18.png"/> </div>
 
 * 参数：
     * `addr`：存储映射区的地址
@@ -4035,7 +4038,7 @@ AIO控制块列表描述了一系列I/O请求，可以由该函数提交
 
 当进程终止时，会自动解除存储映射区的映射。也可以直接调用`munmap`函数来手动解除映射区
 
-<div align="center"> <img src="../pic/apue-advio-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-advio-19.png"/> </div>
 
 * 参数：
     * `addr`：存储映射区的地址
@@ -4122,7 +4125,7 @@ main(int argc, char *argv[])
 
 ### 1.1 创建管道
 
-<div align="center"> <img src="../pic/apue-ipc-1.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-1.png"/> </div>
 
 * `fd`：函数调用返回后记录了管道的2个文件描述符
     - `fd[0]`：为读而打开
@@ -4130,7 +4133,7 @@ main(int argc, char *argv[])
 
  > POSIX.1允许实现支持全双工管道。对于这些实现，fd\[0\]和fd\[1\]以读/写方式打开
 
-<div align="center"> <img src="../pic/apue-ipc-2.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-2.png"/> </div>
 
 一般创建管道后，会fork子进程，然后根据数据流向选择性的关闭父子进程中管道的读端或写端，从而建立父子进程之间通信的IPC：
 
@@ -4144,13 +4147,13 @@ main(int argc, char *argv[])
 
 ### 1.3 标准I/O库管道函数
 
-<div align="center"> <img src="../pic/apue-ipc-4.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-4.png"/> </div>
 
 * `popen`：先执行fork，然后调用exec执行cmdstring，并且返回一个标准I/O文件指针
     - `type`
         + `r`：返回的文件指针是可读的
         + `w`：返回的文件指针是可写的
-    <div align="center"> <img src="../pic/apue-ipc-5.png"/> </div>
+    <div align="center"> <img src="./pic/apue-ipc-5.png"/> </div>
 
 * `pclose`：关闭标准I/O流，等待命令终止，然后返回shell的终止状态
 
@@ -4181,7 +4184,7 @@ FIFO有以下2个**用途**：
 
 创建FIFO类似于创建文件。FIFO的路径名存在于文件系统中
 
-<div align="center"> <img src="../pic/apue-ipc-6.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-6.png"/> </div>
 
 * `mkfifo`
     - `mode`：与[open函数](#21-打开文件)中的mode相同
@@ -4244,7 +4247,7 @@ struct ipc_perm{
 
 **对于任何IPC结构都不存在执行权限**，消息队列和共享内存使用术语”读“和”写“，信号量则用”读“和”更改“。下图显示了每种IPC的6种权限：
 
-<div align="center"> <img src="../pic/apue-ipc-7.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-7.png"/> </div>
 
 ### 4.3 结构限制
 
@@ -4264,7 +4267,7 @@ struct ipc_perm{
         + 因此，不能使用一些已有的系统调用访问或修改其属性，为了加以支持，内核中增加了十几个全新的系统调用。不能使用`ls`查看IPC对象，不能用`rm`删除
         + 因为这些形式的IPC不使用文件描述符，所以不支持I/O复用函数
 
-<div align="center"> <img src="../pic/apue-ipc-8.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-8.png"/> </div>
 
 ”无连接“指无需先调用某种形式的打开函数就能发送消息的能力
 
@@ -4296,13 +4299,13 @@ struct msqid_ds{
 
 下图为消息队列的系统限制：
 
-<div align="center"> <img src="../pic/apue-ipc-9.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-9.png"/> </div>
 
 “导出的”表示这种限制来源于其它限制
 
 ### 5.2 创建或打开消息队列
 
-<div align="center"> <img src="../pic/apue-ipc-10.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-10.png"/> </div>
 
 * `msgget`：创建一个新队列或打开一个现有队列
     - `key_t`：创建IPC结构时需要指定一个键，作为IPC对象的外部名。键由内核转变成标识符
@@ -4317,7 +4320,7 @@ struct msqid_ds{
 
 ### 5.3 操作消息队列
 
-<div align="center"> <img src="../pic/apue-ipc-11.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-11.png"/> </div>
 
 * `msqid`：队列ID（标识符），`msgget`的返回值
 * `cmd`：
@@ -4331,7 +4334,7 @@ struct msqid_ds{
 
 `msgsnd`将新消息添加到队列尾端
 
-<div align="center"> <img src="../pic/apue-ipc-12.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-12.png"/> </div>
 
 每个消息由3部分组成：一个正的长整型类型的字段、一个非负的长度、实际数据字节（对应于长度）
 
@@ -4354,7 +4357,7 @@ struct msqid_ds{
 
 ### 5.5 获取消息
 
-<div align="center"> <img src="../pic/apue-ipc-13.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-13.png"/> </div>
 
 * `msgrcv`：从队列中取消息（并不一定要以先进先出的顺序取消息，也可以按类型字段取消息）
     - `ptr`：与msgsnd中一样
@@ -4418,11 +4421,11 @@ struct{
 
 下图是影响信号量集合的系统限制；
 
-<div align="center"> <img src="../pic/apue-ipc-14.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-14.png"/> </div>
 
 ### 6.2 获得信号量
 
-<div align="center"> <img src="../pic/apue-ipc-15.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-15.png"/> </div>
 
 * `key`：创建IPC结构时需要指定一个键，作为IPC对象的外部名。键由内核转变成标识符
 * `nsems`：该信号量集合中的信号量数
@@ -4439,7 +4442,7 @@ struct{
 
 ### 6.3 操作信号量
 
-<div align="center"> <img src="../pic/apue-ipc-16.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-16.png"/> </div>
 
 * 参数
     - `semid`：信号量集合
@@ -4468,7 +4471,7 @@ struct{
 
 函数`semop`自动执行信号量集合上的操作数组：
 
-<div align="center"> <img src="../pic/apue-ipc-17.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-17.png"/> </div>
 
 * 指定信号量集合
 * `semoparray`：一个指针，指向一个由`sembuf`结构表示的信号量操作数组
@@ -4538,11 +4541,11 @@ struct shmid_ds{
 
 下图为影响共享存储的系统限制：
 
-<div align="center"> <img src="../pic/apue-ipc-18.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-18.png"/> </div>
 
 ### 7.2 创建或获得共享存储
 
-<div align="center"> <img src="../pic/apue-ipc-19.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-19.png"/> </div>
 
 * `key`：创建IPC结构时需要指定一个键，作为IPC对象的外部名。键由内核转变成标识符
 * `size`：共享存储段的长度，单位是字节。实现通常将其向上取为系统页长的整倍数。但是，如果指定的值不是系统页长的整倍数，那么最后一页的余下部分是不可使用的
@@ -4558,7 +4561,7 @@ struct shmid_ds{
 
 ### 7.3 操作共享存储
 
-<div align="center"> <img src="../pic/apue-ipc-20.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-20.png"/> </div>
 
 * `shmid`：共享存储标识符，由函数`shmget`得到
 * `cmd`
@@ -4574,7 +4577,7 @@ struct shmid_ds{
 
 可以调用`shmat`将共享存储段连接到进程的地址空间中
 
-<div align="center"> <img src="../pic/apue-ipc-21.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-21.png"/> </div>
 
 * `shmid`：共享存储段的标识符
 * `addr`：共享存储段连接到进程的该地址
@@ -4592,7 +4595,7 @@ struct shmid_ds{
 
 下列函数可以与共享存储段分离。该调用并不从系统中删除其标识符以及其相关的数据结构。该标识符仍然存在，直到某个进程调用`shmctl`并使用`IPC_RMID`命令特地删除它为止
 
-<div align="center"> <img src="../pic/apue-ipc-22.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-22.png"/> </div>
 
 * `addr`：进程与共享存储段连接的地址
 
@@ -4642,7 +4645,7 @@ main(void)
 }
 ```
 
-<div align="center"> <img src="../pic/apue-ipc-23.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-23.png"/> </div>
 
 <br>
 
@@ -4661,7 +4664,7 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 ### 8.1 创建或获取命名信号量
 
-<div align="center"> <img src="../pic/apue-ipc-24.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-24.png"/> </div>
 
 * 使用现有的命名信号量时，仅指定2个参数：
     - `name`：信号量的名字
@@ -4680,7 +4683,7 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 ### 8.2 关闭释放信号量
 
-<div align="center"> <img src="../pic/apue-ipc-25.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-25.png"/> </div>
 
 如果进程没有首先调用`sem_close`而退出，那么内核将自动关闭任何打开的信号量
 
@@ -4688,7 +4691,7 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 ### 8.3 销毁命名信号量
 
-<div align="center"> <img src="../pic/apue-ipc-26.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-26.png"/> </div>
 
 该函数删除信号量的名字。如果没有打开的信号量引用，则该信号量会被销毁。否则，销毁将延迟到最后一个打开的引用关闭
 
@@ -4698,14 +4701,14 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 不像XSI信号量，我们只能通过一个函数调用来调节POSIX信号量的值
 
-<div align="center"> <img src="../pic/apue-ipc-27.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-27.png"/> </div>
 
 * **sem_wait函数**：如果信号量计数是0就会发生阻塞。直到成功使信号量减1或者被信号中断时才返回
 * **sem_trywait函数**：可以避免阻塞。当信号量是0时，会返回-1并且将`errno`置为`EAGAIN`
 
 函数`sem_timewait`可以选择阻塞一段时间
 
-<div align="center"> <img src="../pic/apue-ipc-28.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-28.png"/> </div>
 
 `tsptr`：绝对时间，超时是基于`CLOCK_REALTIME`时钟的
 
@@ -4715,11 +4718,11 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 #### 2）增1
 
-<div align="center"> <img src="../pic/apue-ipc-29.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-29.png"/> </div>
 
 ### 8.5 创建未命名信号量
 
-<div align="center"> <img src="../pic/apue-ipc-30.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-30.png"/> </div>
 
 * `pshared`：表明是否在多个进程中使用信号量
     - `非0`：在多个进程中使用信号量
@@ -4729,13 +4732,13 @@ POSIX信号量接口意在解决[XSI信号量](#6信号量)接口的几个缺陷
 
 ### 8.6 销毁未命名信号量
 
-<div align="center"> <img src="../pic/apue-ipc-31.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-31.png"/> </div>
 
 该函数调用后，不能再使用任何带有`sem`的信号量函数，除非通过调用`sem_init`重新初始化
 
 ### 8.7 检索未命名信号量的值
 
-<div align="center"> <img src="../pic/apue-ipc-32.png"/> </div>
+<div align="center"> <img src="./pic/apue-ipc-32.png"/> </div>
 
 * `valp`：包含了信号量的值
 
